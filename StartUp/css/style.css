@@ -1,0 +1,27 @@
+/* Main styles goes here */
+body {
+    font-family: sans-serif;
+    background: #f9f9f9;
+    color: #34495e;
+    font-size: 14px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* Styles for Off-canvas Menu navigation */
+
+
+/* Styles for Responsive columns */
+
+
+
+/* Media Queries */
