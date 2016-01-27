@@ -1,22 +1,137 @@
 /* Main styles goes here */
-body {
-    font-family: sans-serif;
-    background: #f9f9f9;
-    color: #34495e;
+* {
+
+    text-decoration: none;
+
+}
+#search-toolbar .search-icon-wrapper{
+    width: 20px;
+    height: 20px;
+    fill: #FFF;
+    padding: 13px 11px 12px;
+    flex-shrink: 0;
     font-size: 14px;
-    overflow-x: hidden;
 }
 
-.container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+#menuToggle{
+    position: absolute;
+    z-index: 11;
+    width: 20px;
+    height: 20px;
+    fill: #FFF;
+    padding: 13px 11px 12px;
+    flex-shrink: 0;
+    font-size: 14px;
 }
 
-p {
-    margin-bottom: 1em;
+ #search-toolbar {
+    background: #5B7A59 none repeat scroll 0% 0%;
+     height: 45px;
+    display: flex;
+}
+.search-input-wrapper{
+    margin-left: 40px;
+}
+#menuToggle a,#user-toolbar a{
+    text-decoration:none; 
+}
+#search-toolbar .search-input[type="text"] {
+    font-size: 18px;
+    color: #FFF;
+    height: 45px;
+    width: 200px;
+    border: medium none !important;
+    background: transparent;
+    padding: 0px;
+    line-height: 20px;
+}
+#theMenu{
+    width: 280px;
+    
+}
+.avatar{
+    width:32px;
+    height:32px;
+    border-radius: 50%;
+    margin: 7px;
 }
 
+
+#user-toolbar{
+    height: 45px;
+}
+#user-toolbar .user {
+    height: 45px;
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    -moz-box-flex: 1;
+    flex: 1 1 0%;
+    overflow: hidden;
+}
+#user-toolbar .user-menu {
+    height: 20px;
+    width: 20px;
+}
+.stream-counts {
+    display: inline-block;
+    float: left;
+    height: 45px;
+}
+.stream-counts a i {
+    width: 20px;
+    height: 20px;
+    color: black;
+    margin-right: 10px;
+    padding: 13px 11px 12px;
+    font-size: 18px;
+}
+.stream-counts a {
+    align-items: center;
+    width: 45px; 
+    text-align: center;
+    height: 45px;
+}
+.user{
+    align-items: center;
+    width:200px;
+    float:left;
+}
+.sidebarItem {
+    overflow: hidden;
+    height: 38px;
+    z-index: 15;
+    position: relative;
+}
+.sidebarItem .list-icon {
+    height: 20px;
+    width: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    text-align: center;
+}
+.sidebarItem a .title {
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #262626;
+    -moz-box-flex: 1;
+    flex: 1 1 0%;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.sidebarItem.active a .overdue-count {
+    color: #F7F7F7;
+    background: rgba(215, 78, 72, 0.8) none repeat scroll 0% 0%;
+}
+sidebarItem a .count{
+    color: #BDBCBB;
+font-size: 12px;
+padding-left: 4px;
+padding-right: 4px;
+}
 /* Styles for Off-canvas Menu navigation */
 
 
