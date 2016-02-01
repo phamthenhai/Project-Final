@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Responsive Web Design Basic Sample</title>
+
+        <link rel="stylesheet" type="text/css" href="/app/styles/menu.css">
+        <link rel="stylesheet" type="text/css" href="/app/styles/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/app/styles/container.css">
+       
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    </head>
+
+    <body >
+        <div id="wrapper">
+            <div id="sidebar-wrapper">
+                <div class="menu-primary">
+                    <a href="#" data-toggle="offcanvas" id="menu-toggle">
+                        <span class="fa fa-bars icon"></span>
+                    </a>
+                    <span>
+                        <input id="search-input" type="search">
+                        <span class="fa fa-search  icon search"></span>
+                    </span>
+                </div>
+                <div class="menu-user">
+                        <a href="#"><img class="avatar" src="images/avatar.png"> <span class="title" id="user-name">khidauma</span>
+                        <span class="fa fa-angle-down icon-black"></span>
+                        </a>
+                    <span class="fa fa-comment-o icon-message"></span>
+                        <span class="fa fa-bell-o icon-ring"></span>
+                        
+                    </div>
+                <ul class="sidebar-nav" id="menu">
+                    
+                    <li>
+                        <a href="#"><span class="fa fa-inbox icon-black"></span><span class="title">Inbox</span></a>span class="label-message" >2</span>
+                        <span class="label-message" >1</span>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-star-o icon-black"></span><span class="title">Starred</span><span class="label-message" >2</span>
+                        <span class="label-message" >1</span></a>
+                    </li><li>
+                       <a href="#"><span class="fa fa-calendar-o icon-black"></span><span class="title">Today</span><span class="label-message" >2</span>
+                        <span class="label-message" >1</span></a>
+                    </li><li>
+                        <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" >2</span>
+                        <i class="label-message" >1</i></a>
+                    </li>
+                    
+                  
+                </ul>
+                <div class="menu-create">
+                    <a href="#" >
+                        <span class="fa fa-plus icon-black"></span><span class="title">Create list</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="head-content">
+                <div class="label-search">
+                    <h1>123456</h1>
+                 </div>
+                <div class="more-info">
+                    <span style="color:#FFF;" class="fa fa-share-alt-square icon-info" ><br><span>Share</span></span>
+                    <span style="color:#FFF;" class="fa fa-sort-alpha-asc icon-info" ><br><span>Sort</span></span>
+                    <span style="color:#FFF;" class="fa fa-ellipsis-h icon-info" ><br><span>More</span></span>
+            </div>
+            </div>
+            <div class="new-note">
+				    <button class="btn-search" type="button">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <input id="input-note" type="text" placeholder="Add a to do...">
+                    <div class="show">
+                        <button class="btn-search icon-new-note" type="date">
+                            <i class="fa fa-calendar-o icon"></i>
+                        </button>
+                        <button class="btn-search" type="button">
+                            <i class="fa fa-star-o icon"></i>
+                        </button>
+                    </div>
+            </div>
+            <ol class="note">
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i> Day 1</li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
+            </ol>
+            <div class="show-complete">
+                <a href="#"><span class="title">show completed to-dos</span></a>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+        <!--menu-description-->
+        <!--<div id="menu-desc" hidden="">
+            dadsdsa
+        </div>-->
+        <!--end-menu-description-->
+        </div>
+        <script src="lib/jQuery/jquery-1.10.2.min.js"></script>
+        <script src="lib/js.js"></script>
+    </body>
+</html>
