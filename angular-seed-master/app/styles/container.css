@@ -6,7 +6,9 @@
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  width: auto;
+  width: -webkit-calc(100% - 45px);
+  width: -moz-calc(100% - 45px);
+  width: -o-calc(100% - 45px);
   overflow-x: hidden; }
 
 #page-content-wrapper {

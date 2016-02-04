@@ -21,7 +21,9 @@
         margin-right: 0;
         margin-left: 40px;
         @include transition(all 0.5s ease);
-        width: auto;
+         width: -webkit-calc(100% - 45px); 
+        width:    -moz-calc(100% - 45px); 
+        width:      -o-calc(100% - 45px);
         overflow-x: hidden; 
     
  }
