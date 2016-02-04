@@ -38,7 +38,7 @@
                 <ul class="sidebar-nav" id="menu">
                     
                     <li>
-                        <a href="#"><span class="fa fa-inbox icon-black"></span><span class="title">Inbox</span></a>span class="label-message" >2</span>
+                        <a href="#"><span class="fa fa-inbox icon-black"></span><span class="title">Inbox</span></a><span class="label-message" >2</span>
                         <span class="label-message" >1</span>
                     </li>
                     <li>
@@ -62,7 +62,7 @@
             </div>
             <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="head-content">
+            <nav class="head-content ">
                 <div class="label-search">
                     <h1>123456</h1>
                  </div>
@@ -71,37 +71,84 @@
                     <span style="color:#FFF;" class="fa fa-sort-alpha-asc icon-info" ><br><span>Sort</span></span>
                     <span style="color:#FFF;" class="fa fa-ellipsis-h icon-info" ><br><span>More</span></span>
             </div>
-            </div>
+            </nav>
             <div class="new-note">
 				    <button class="btn-search" type="button">
                         <i class="fa fa-plus"></i>
                     </button>
-                    <input id="input-note" type="text" placeholder="Add a to do...">
+                    <input id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
                     <div class="show">
-                        <button class="btn-search icon-new-note" type="date">
+                        
                             <i class="fa fa-calendar-o icon"></i>
-                        </button>
-                        <button class="btn-search" type="button">
+                        
                             <i class="fa fa-star-o icon"></i>
-                        </button>
+                        
                     </div>
             </div>
             <ol class="note">
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i> Day 1</li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>
+                        <span class="progress-bar" style="width:10%;"></span>
+                    </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span>
+                    <span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span> 
+                        <span class="progress-bar" style="width:10%;"></span> 
+                </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>  
+                        <span class="progress-bar" style="width:60%;"></span> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>  
+                        <span class="progress-bar" style="width:30%;"></span> </li>
+                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span> 
+                        <span class="progress-bar" style="width:100%;"></span> 
+                </li>
             </ol>
             <div class="show-complete">
                 <a href="#"><span class="title">show completed to-dos</span></a>
             </div>
+            <ol class="note-complete">
+                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
+                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
+                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
+                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
+                
+            </ol>
         </div>
         <!-- /#page-content-wrapper -->
         <!--menu-description-->
-        <!--<div id="menu-desc" hidden="">
-            dadsdsa
-        </div>-->
+        <div id="menu-desc">
+            <div class="menu-desc-label"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-star-o icon-desc"></i> </span></div>
+            <div class="body">
+                <div class="h45">
+                    <span><i class="fa fa-calendar icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Set due date"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-clock-o icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Remind me"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-plus icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Add a subtask"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                <div class="h45">
+                    <ol class="">
+                        <li><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li>
+                    </ol>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-pencil-square-o icon-black"></i></span>
+                    <div class="title-menu-desc"><span><input class="input-note" type="text" placeholder="Add a note"></span><i class="fa fa-external-link icon-black"></i></div>
+                </div><div class="h45">
+                    <span><i class="fa fa-paperclip icon-black"></i></span>
+                    <div class="title-menu-desc"><span><input class="input-file" type="text" placeholder="Add a file"></span><i class="fa fa-microphone icon-black"></i><i class="fa fa-dropbox icon-black"></i></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <input class="form-control" type="text" placeholder="Add a comment...">
+                <i class="fa fa-caret-square-o-right"></i>
+                <span>Created on Wed, January 27</span>
+                <i class="fa fa-caret-square-o-right"></i>
+            </div>
+        </div>
         <!--end-menu-description-->
         </div>
         <script src="lib/jQuery/jquery-1.10.2.min.js"></script>

@@ -16,18 +16,14 @@
   transition: all 0.5s ease;
   position: relative;
   margin-left: 250px;
-  width: auto;
-  margin-right: 0;
   overflow-x: hidden;
-  overflow-y: auto;
-  /*@include media("(max-width:600px)"){
-      position: relative;
-      margin-right: 0;
-      margin-left: 45px;
-      @include transition(all 0.5s ease);
-      width: auto;
-      overflow-x: hidden;  
-  }*/ }
+  overflow-y: hidden;
+  width: -webkit-calc(100% - 250px);
+  width: -moz-calc(100% - 250px);
+  width: -o-calc(100% - 250px);
+  float: left;
+  z-index: 1001;
+  overflow: hidden; }
 
 .search {
   margin-left: 0px;
@@ -37,8 +33,9 @@
   background: #668964;
   height: 40px;
   float: left;
+  position: relative;
   width: 100%;
-  margin: 0; }
+  z-index: 1001; }
 
 .head-content .label-search {
   float: left; }
@@ -54,7 +51,7 @@
   position: absolute;
   width: 150px;
   float: left;
-  z-index: 1001; }
+  z-index: 1002; }
 
 .new-note {
   width: auto;
@@ -65,7 +62,7 @@
   background: #668964;
   border-radius: 5px; }
 
-.note-item {
+.note-item, .note-item-complete {
   width: auto;
   margin-left: 20px;
   margin-right: 20px;
@@ -76,22 +73,26 @@
   -ms-border-radius: 3px;
   border-radius: 3px;
   margin-top: 1px;
-  color: #FFF; }
+  padding-top: 5px;
+  position: relative;
+  color: #FFF;
+  line-height: 40px; }
 
-.note-item input {
+.note-item input, .note-item-complete input {
   height: 20px; }
 
 #input-note {
   border: 0;
-  width: 80%;
   background: #668964;
-  opacity: 0.7;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 6px;
   color: #FFF;
-  display: inline;
-  line-height: 20px;
-  float: left; }
+  line-height: 30px;
+  float: left;
+  outline: none;
+  font-size: 18px;
+  margin-right: 0px;
+  padding-right: 0px;
+  width: calc(100% - 150px); }
 
 .icon-new-note {
   float: left; }
@@ -113,9 +114,11 @@
   float: left; }
 
 .show {
-  float: left; }
+  float: right;
+  height: 20px;
+  padding-top: 4px; }
 
-.note {
+.note, .note-complete {
   margin-top: 20px;
   list-style: none;
   margin-left: 0;
@@ -138,7 +141,34 @@
   font-size: 11px;
   padding: 5px; }
 
+.show-complete .title {
+  color: #FFF; }
+
+.show-complete a:hover {
+  text-decoration: none; }
+
+.note-name, .note-name-complete {
+  color: #000;
+  line-height: 40px;
+  font-size: 16px; }
+
+.note-name-complete {
+  text-decoration: line-through; }
+
+.note-item-complete {
+  opacity: 0.4; }
+
 a {
   text-decoration: none; }
+
+#input-note:hover {
+  outline: none; }
+
+.datetime-notice {
+  font-size: 10px;
+  color: crimson; }
+
+.description-note {
+  float: right; }
 
 /*# sourceMappingURL=container.css.map */

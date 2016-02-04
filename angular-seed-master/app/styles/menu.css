@@ -27,8 +27,7 @@ body {
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 1000;
   margin-left: -250px;
   float: left;
@@ -47,12 +46,14 @@ body {
 .menu-user {
   background: transparent;
   float: left;
-  padding-left: 5px; }
+  position: absolute;
+  padding-left: 5px;
+  padding-top: 4px; }
 
 .menu-user a, .menu-user a span, .menu-user a .avatar {
   float: left; }
 
-.icon, .icon-black, .icon-ring, .icon-message {
+.icon, .icon-black, .icon-ring, .icon-message, .icon-desc {
   width: 40px;
   height: 20px;
   font-size: 14px;
@@ -65,6 +66,11 @@ body {
 
 .icon-black, .icon-ring, .icon-message {
   color: #000;
+  font-size: 15px; }
+
+.icon-desc {
+  color: #B2B2B2;
+  float: none;
   font-size: 15px; }
 
 .menu-create {
@@ -85,11 +91,16 @@ body {
 .sidebar-nav {
   list-style: none;
   top: 0;
+  margin-top: 40px;
   float: left;
   padding: 0;
   width: 250px;
-  margin-bottom: 40px;
-  position: relative; }
+  height: 100%;
+  max-height: 200px;
+  /*overflow-y: scroll;
+  overflow-x: hidden;*/
+  position: relative;
+  display: block; }
 
 /*.sidebar-nav li a{
     margin-left: 6px;
@@ -131,7 +142,8 @@ body {
   display: block;
   font-size: 14px;
   align-items: center;
-  padding: 3px; }
+  padding: 3px;
+  padding-top: 7px; }
 
 .icon-ring, .icon-message {
   float: right;
@@ -150,10 +162,20 @@ body {
 
 /*menu description*/
 #menu-desc {
-  width: 250px;
-  height: auto;
+  width: 350px;
+  height: 100%;
   background: #F7F7F7;
-  float: left; }
+  position: absolute;
+  right: 200px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1001;
+  margin-right: -200px;
+  float: right; }
 
 .label-message {
   float: right;
@@ -174,5 +196,65 @@ body {
 .title {
   width: auto;
   margin-left: 5px; }
+
+.menu-desc-label {
+  height: 50px;
+  padding-top: 5px;
+  background: #FFF;
+  border-bottom: 1px solid #EBEBEB; }
+
+.menu-desc-label .fa-square-o {
+  font-size: 18px; }
+
+.progress-bar {
+  z-index: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  display: block;
+  position: absolute;
+  -webkit-transition: width 225ms ease;
+  -moz-transition: width 225ms ease;
+  -o-transition: width 225ms ease;
+  -ms-transition: width 225ms ease;
+  transition: width 225ms ease;
+  border-right-width: 1px;
+  border-right-style: solid;
+  opacity: 0.08;
+  float: left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  background: #EFF3EF; }
+
+.h45 {
+  height: 45px; }
+
+.title-menu-desc {
+  line-height: 40px;
+  width: 310px;
+  border-bottom: 1px solid #EBEBEB;
+  margin-left: 40px; }
+
+.input-file, .input-note {
+  border: 0;
+  float: left;
+  width: 220px;
+  background: transparent;
+  padding-left: 5px; }
+
+.input-note {
+  width: 260px; }
+
+.input-file:hover, .input-note:hover {
+  outline: none; }
+
+.bottom {
+  padding: 7px;
+  border-top: 1px solid #EBEBEB;
+  bottom: 0;
+  position: absolute;
+  width: 100%; }
 
 /*# sourceMappingURL=menu.css.map */
