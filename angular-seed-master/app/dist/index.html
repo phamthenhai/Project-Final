@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="notesApp">
 
     <head>
         <meta charset="utf-8">
@@ -7,17 +7,20 @@
 
         <title>Responsive Web Design Basic Sample</title>
 
-        <link rel="stylesheet" type="text/css" href="/app/styles/menu.css">
-        <link rel="stylesheet" type="text/css" href="/app/styles/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="/app/styles/container.css">
+        <link rel="stylesheet" type="text/css" href="css/menu.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/container.css">
        
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
 
     <body >
         <div id="wrapper">
-            <div id="sidebar-wrapper">
+            <div id="sidebar-wrapper" ng-controller="MenuSideBar">
                 <div class="menu-primary">
                     <a href="#" data-toggle="offcanvas" id="menu-toggle">
                         <span class="fa fa-bars icon"></span>
@@ -28,7 +31,7 @@
                     </span>
                 </div>
                 <div class="menu-user">
-                        <a href="#"><img class="avatar" src="images/avatar.png"> <span class="title" id="user-name">khidauma</span>
+                        <a href="#"><img class="avatar" src="img/avatar.png"> <span class="title" id="user-name" >khidauma</span>
                         <span class="fa fa-angle-down icon-black"></span>
                         </a>
                     <span class="fa fa-comment-o icon-message"></span>
@@ -61,7 +64,7 @@
                 </div>
             </div>
             <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" ng-controller="notes">
             <nav class="head-content ">
                 <div class="label-search">
                     <h1>123456</h1>
@@ -72,11 +75,12 @@
                     <span style="color:#FFF;" class="fa fa-ellipsis-h icon-info" ><br><span>More</span></span>
             </div>
             </nav>
+            <div class="scroll-note">
             <div class="new-note">
 				    <button class="btn-search" type="button">
                         <i class="fa fa-plus"></i>
                     </button>
-                    <input id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
+                    <input ng-model="inputnote" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
                     <div class="show">
                         
                             <i class="fa fa-calendar-o icon"></i>
@@ -85,21 +89,11 @@
                         
                     </div>
             </div>
-            <ol class="note">
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>
-                        <span class="progress-bar" style="width:10%;"></span>
-                    </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span>
-                    <span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span> 
-                        <span class="progress-bar" style="width:10%;"></span> 
+            <ol class="note" >
+                <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" >
+                    <i class="fa fa-square-o icon-black"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:10%;"></span>
                 </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>  
-                        <span class="progress-bar" style="width:60%;"></span> </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span>  
-                        <span class="progress-bar" style="width:30%;"></span> </li>
-                <li class="note-item"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span> 
-                        <span class="progress-bar" style="width:100%;"></span> 
-                </li>
+                
             </ol>
             <div class="show-complete">
                 <a href="#"><span class="title">show completed to-dos</span></a>
@@ -112,9 +106,10 @@
                 
             </ol>
         </div>
+            </div>
         <!-- /#page-content-wrapper -->
         <!--menu-description-->
-        <div id="menu-desc">
+        <div id="menu-desc" hidden="">
             <div class="menu-desc-label"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-star-o icon-desc"></i> </span></div>
             <div class="body">
                 <div class="h45">
@@ -125,14 +120,16 @@
                     <span><i class="fa fa-clock-o icon-black"></i></span>
                     <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Remind me"><i class="fa fa-times icon-black"></i></div>
                 </div>
+                
+                <div class="ab">
+                    <ol class="list-task">
+                        <li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li><li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc right-icon"></i> </li>
+                        <li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li>
+                    </ol>
+                </div>
                 <div class="h45">
                     <span><i class="fa fa-plus icon-black"></i></span>
                     <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Add a subtask"><i class="fa fa-times icon-black"></i></div>
-                </div>
-                <div class="h45">
-                    <ol class="">
-                        <li><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li>
-                    </ol>
                 </div>
                 <div class="h45">
                     <span><i class="fa fa-pencil-square-o icon-black"></i></span>
@@ -144,14 +141,18 @@
             </div>
             <div class="bottom">
                 <input class="form-control" type="text" placeholder="Add a comment...">
-                <i class="fa fa-caret-square-o-right"></i>
-                <span>Created on Wed, January 27</span>
-                <i class="fa fa-caret-square-o-right"></i>
+                <div class="toggle-menu-desc">
+                    <i class="fa fa-caret-square-o-right"></i>
+                    <span class="date-task">Created on Wed, January 27</span>
+                    <span class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
+                </div>
             </div>
         </div>
         <!--end-menu-description-->
         </div>
         <script src="lib/jQuery/jquery-1.10.2.min.js"></script>
         <script src="lib/js.js"></script>
+        <script src="lib/angular.js"></script>
+        <script src="lib/controllers.js"></script>
     </body>
 </html>
