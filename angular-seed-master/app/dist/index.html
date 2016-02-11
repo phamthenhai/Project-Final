@@ -18,9 +18,9 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
 
-    <body >
+    <body  ng-controller="notes">
         <div id="wrapper">
-            <div id="sidebar-wrapper" ng-controller="MenuSideBar">
+            <div id="sidebar-wrapper" >
                 <div class="menu-primary">
                     <a href="#" data-toggle="offcanvas" id="menu-toggle">
                         <span class="fa fa-bars icon"></span>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <!-- Page Content -->
-        <div id="page-content-wrapper" ng-controller="notes">
+        <div id="page-content-wrapper">
             <nav class="head-content ">
                 <div class="label-search">
                     <h1>123456</h1>
@@ -90,7 +90,7 @@
                     </div>
             </div>
             <ol class="note" >
-                <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" >
+                <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
                     <i class="fa fa-square-o icon-black"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:10%;"></span>
                 </li>
                 
@@ -109,8 +109,8 @@
             </div>
         <!-- /#page-content-wrapper -->
         <!--menu-description-->
-        <div id="menu-desc" hidden="">
-            <div class="menu-desc-label"><i class="fa fa-square-o icon-black"></i><span class="note-name">Name 1</span><span class="description-note"><i class="fa fa-star-o icon-desc"></i> </span></div>
+        <div id="menu-desc" ng-show="divdbldisp">
+            <div class="menu-desc-label"><i class="fa fa-square-o icon-black"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-star-o icon-desc"></i> </span></div>
             <div class="body">
                 <div class="h45">
                     <span><i class="fa fa-calendar icon-black"></i></span>
@@ -142,7 +142,7 @@
             <div class="bottom">
                 <input class="form-control" type="text" placeholder="Add a comment...">
                 <div class="toggle-menu-desc">
-                    <i class="fa fa-caret-square-o-right"></i>
+                    <span ng-click="toggledbldisplayclose();"><i class="fa fa-caret-square-o-right"></i></span>
                     <span class="date-task">Created on Wed, January 27</span>
                     <span class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
                 </div>
@@ -150,9 +150,9 @@
         </div>
         <!--end-menu-description-->
         </div>
-        <script src="lib/jQuery/jquery-1.10.2.min.js"></script>
-        <script src="lib/js.js"></script>
-        <script src="lib/angular.js"></script>
-        <script src="lib/controllers.js"></script>
+        <script src="js/jQuery/jquery-1.10.2.min.js"></script>
+        <script src="js/js.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/controllers/controllers.js"></script>
     </body>
 </html>

@@ -167,10 +167,10 @@ body {
   background: #F7F7F7;
   position: absolute;
   right: 200px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -ms-transition: all 0.8s ease;
+  transition: all 0.8s ease;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1001;

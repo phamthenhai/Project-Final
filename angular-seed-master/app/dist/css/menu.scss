@@ -187,7 +187,7 @@ body{
     background: #F7F7F7;
     position: absolute;
     right: 200px;
-    @include transition(all 0.5s ease);
+    @include transition(all 0.8s ease);
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 1001;
