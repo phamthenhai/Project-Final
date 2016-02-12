@@ -2,6 +2,8 @@ body{
     margin: 0;
     padding: 0;
     background-image: url("/app/dist/img/sample.jpg"); 
+    background-attachment: fixed;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 } 
@@ -223,7 +225,7 @@ body{
 }
 
 .progress-bar{
-    z-index: 0;
+    z-index: -10;
     top: 0;
     height: 100%;
     width: 0%;
@@ -293,4 +295,7 @@ body{
     margin-left: 80px;
     color:#BAA3AE;
     font-size: 12px;
+}
+.index{
+    z-index: 1000;
 }

@@ -80,10 +80,10 @@
 				    <button class="btn-search" type="button">
                         <i class="fa fa-plus"></i>
                     </button>
-                    <input ng-model="inputnote" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
+                    <input ng-model="inputnote" my-enter="doSomething()" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
                     <div class="show">
                         
-                            <i class="fa fa-calendar-o icon"></i>
+                            <i class="fa fa-calendar-o icon form_datetime"></i>
                         
                             <i class="fa fa-star-o icon"></i>
                         
@@ -91,19 +91,15 @@
             </div>
             <ol class="note" >
                 <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
-                    <i class="fa fa-square-o icon-black"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:10%;"></span>
+                    <i ng-click="complete(note); playSound();" class="fa fa-square-o icon-black index"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:0%;"></span>
                 </li>
                 
             </ol>
             <div class="show-complete">
-                <a href="#"><span class="title">show completed to-dos</span></a>
+                <a href="#" ng-click='showcomplete()'><span class="title">show completed to-dos</span></a>
             </div>
             <ol class="note-complete">
-                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
-                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
-                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
-                <li class="note-item-complete"><i class="fa fa-check-square-o icon-black"></i><span class="note-name-complete">Name 1</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
-                
+                <li ng-show='showcompl' class="note-item-complete"  ng-repeat="completed in arrcompletes"><i class="fa fa-check-square-o icon-black"  ng-click="recomplete(completed);"></i><span class="note-name-complete">{{completed.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
             </ol>
         </div>
             </div>
@@ -153,6 +149,7 @@
         <script src="js/jQuery/jquery-1.10.2.min.js"></script>
         <script src="js/js.js"></script>
         <script src="js/angular.js"></script>
+        <script src="js/angular.audio.js"></script>
         <script src="js/controllers/controllers.js"></script>
     </body>
 </html>
