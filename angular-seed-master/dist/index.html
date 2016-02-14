@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Responsive Web Design Basic Sample</title>
+
+        <link rel="stylesheet" type="text/css" href="css/menu.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/container.css">
+       
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    </head>
+
+    <body  ng-controller="notes">
+        <div id="wrapper">
+            <div id="sidebar-wrapper" >
+                <nav class="menu-primary">
+                    <a href="#" data-toggle="offcanvas" id="menu-toggle">
+                        <span class="fa fa-bars icon"></span>
+                    </a>
+                    <span>
+                        <input id="search-input" type="search">
+                        <span class="fa fa-search  icon search"></span>
+                    </span>
+                </nav>
+                <div class="menu-user">
+                        <a href="#"><img class="avatar" src="img/avatar.png"> <span class="title" id="user-name" >khidauma</span>
+                        <span class="fa fa-angle-down icon-black"></span>
+                        </a>
+                    <span class="fa fa-comment-o icon-message"></span>
+                        <span class="fa fa-bell-o icon-ring"></span>
+                        
+                    </div>
+                <ul class="sidebar-nav" id="menu">
+                    
+                    <li>
+                        <a href="#"><span class="fa fa-inbox icon-black"></span><span class="title">Inbox</span></a><span class="label-message" >2</span>
+                        <span class="label-message" >1</span>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-star-o icon-black"></span><span class="title">Starred</span><span class="label-message" >2</span>
+                        <span class="label-message" >1</span></a>
+                    </li><li>
+                       <a href="#"><span class="fa fa-calendar-o icon-black"></span><span class="title">Today</span><span class="label-message" >2</span>
+                        <span class="label-message" >1</span></a>
+                    </li><li>
+                        <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" >2</span>
+                        <i class="label-message" >1</i></a>
+                    </li>
+                    
+                    
+                  
+                </ul>
+                <div class="menu-create">
+                    <a href="#" >
+                        <span class="fa fa-plus icon-black"></span><span class="title">Create list</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="head-content ">
+                <div class="label-search">
+                    <h1>123456</h1>
+                 </div>
+                <div class="more-info">
+                    <span style="color:#FFF;" class="fa fa-share-alt-square icon-info" ><br><span>Share</span></span>
+                    <span style="color:#FFF;" class="fa fa-sort-alpha-asc icon-info" ><br><span>Sort</span></span>
+                    <span style="color:#FFF;" class="fa fa-ellipsis-h icon-info" ><br><span>More</span></span>
+                </div>
+            </nav>
+            <div class="scroll-note">
+                <div class="new-note">
+                        <button class="btn-search" type="button">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <input ng-model="inputnote" my-enter="doSomething()" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
+                        <div class="show">
+
+                                <i class="fa fa-calendar-o icon form_datetime"></i>
+
+                                <i class="fa fa-star-o icon"></i>
+
+                        </div>
+                </div>
+                <ol class="note" >
+                    <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
+                        <i ng-click="complete(note); playSound();" class="fa fa-square-o icon-black index"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:0%;"></span>
+                    </li>
+
+                </ol>
+                <div class="show-complete">
+                    <a href="#" ng-click='showcomplete()'><span class="title">show completed to-dos</span></a>
+                </div>
+                <ol class="note-complete">
+                    <li ng-show='showcompl' class="note-item-complete"  ng-repeat="completed in arrcompletes"><i class="fa fa-check-square-o icon-black"  ng-click="recomplete(completed);"></i><span class="note-name-complete">{{completed.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">05.01.2016</span><i class="fa fa-star-o icon-desc"></i> </span></li>
+                </ol>
+            </div>
+            </div>
+        <!-- /#page-content-wrapper -->
+        <!--menu-description-->
+        <div id="menu-desc" ng-show="divdbldisp">
+            <div class="menu-desc-label">
+                <i class="fa fa-square-o icon-black"></i>
+                <span hidden class="note-name">{{note.nname}}</span>
+                <textarea maxlength="255"  class="edit-form" ng-model="editnote"></textarea>
+                <span class="description-note">
+                    <i class="fa fa-star-o icon-desc"></i> 
+                </span></div>
+            <div class="body">
+                <div class="h45">
+                    <span><i class="fa fa-calendar icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Set due date"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-clock-o icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Remind me"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                
+                <div class="ab">
+                    <ol class="list-task">
+                        <li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li><li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc right-icon"></i> </li>
+                        <li ><i class="fa fa-check-square-o icon-black"></i><span class="note-name">Name 1</span><i class="fa fa-star-o icon-desc"></i> </li>
+                    </ol>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-plus icon-black"></i></span>
+                    <div class="title-menu-desc"><input class="input-note" type="text" placeholder="Add a subtask"><i class="fa fa-times icon-black"></i></div>
+                </div>
+                <div class="h45">
+                    <span><i class="fa fa-pencil-square-o icon-black"></i></span>
+                    <div class="title-menu-desc"><span><input class="input-note" type="text" placeholder="Add a note"></span><i class="fa fa-external-link icon-black"></i></div>
+                </div><div class="h45">
+                    <span><i class="fa fa-paperclip icon-black"></i></span>
+                    <div class="title-menu-desc"><span><input class="input-file" type="text" placeholder="Add a file"></span><i class="fa fa-microphone icon-black"></i><i class="fa fa-dropbox icon-black"></i></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <input class="form-control" type="text" placeholder="Add a comment...">
+                <div class="toggle-menu-desc">
+                    <span ng-click="toggledbldisplayclose();"><i class="	glyphicon glyphicon-chevron-right"></i></span>
+                    <span class="date-task">Created on Wed, January 27</span>
+                    <span class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
+                </div>
+            </div>
+        </div>
+        <!--end-menu-description-->
+        </div>
+        <script src="js/jQuery/jquery-1.10.2.min.js"></script>
+        <script src="js/js.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/angular.audio.js"></script>
+        <script src="js/controllers/controllers.js"></script>
+    </body>
+</html>

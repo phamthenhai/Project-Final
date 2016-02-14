@@ -8,7 +8,7 @@
   transition: all 0.5s ease;
   width: -webkit-calc(100% - 45px);
   width: -moz-calc(100% - 45px);
-  width: -o-calc(100% - 45px); }
+  width: calc(100% - 45px); }
 
 #page-content-wrapper {
   -webkit-transition: all 0.5s ease;
@@ -19,7 +19,7 @@
   margin-left: 250px;
   width: -webkit-calc(100% - 250px);
   width: -moz-calc(100% - 250px);
-  width: -o-calc(100% - 250px);
+  width: calc(100% - 250px);
   float: left;
   z-index: 1001; }
 
@@ -178,5 +178,3 @@ a {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative; }
-
-/*# sourceMappingURL=container.css.map */

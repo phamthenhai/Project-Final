@@ -1,36 +1,83 @@
 // Include gulp
-var gulp = require('gulp'); 
+var gulp = require('gulp'),
+	gutil = require('gulp-util');
 
 // Include Our Plugins
-var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
+var connect = require('gulp-connect');
 
-// Lint Task
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+
+var	input  = {
+      'javascript': './app/js/**/*',
+      'stylesheets': './app/css/**/*.scss',
+      'bower_components': './app/bower_components/**',
+      'html_files': './app/**/*.html',
+      'image_files': './app/img/**/*'
+    },
+
+    output = {
+      'javascript': './dist/js/',
+      'stylesheets': './dist/css/',
+      'bower_components': 'dist/bower_components',
+      'html_files': 'dist/',
+      'image_files': 'dist/img/'
+    };
  
+ //Minify javascripts
 gulp.task('scripts', function() {
-  gulp.src('js/**/*.js')
-    .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('.'))
-    .pipe(uglify())
-    .pipe(gulp.dest('.'))
+  gulp.src(input.javascript)
+  	//only uglify if gulp is ran with '--type production'
+    .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+    .pipe(gulp.dest(output.javascript))
 });
  
+ //Compile scss
 gulp.task('styles', function() {
-  gulp.src('/*.scss')
+  gulp.src(input.stylesheets)
     .pipe(sass())
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest(output.stylesheets));
+});
+
+// Copy bower components
+gulp.task('copy-bower-components', function () {
+  gulp.src(input.bower_components)
+    .pipe(gulp.dest(output.bower_components));
 });
  
-gulp.task('automate', function() {
-    gulp.watch(['*.scss', 'js/**/*.js'], ['scripts', 'styles']);
+// Copy html files
+gulp.task('copy-html-files', function () {
+  gulp.src(input.html_files)
+    .pipe(gulp.dest(output.html_files));
+});
+// Copy images
+gulp.task('copy-images', function () {
+  gulp.src(input.image_files)
+    .pipe(gulp.dest(output.image_files));
+});
+// Connect dist to port
+gulp.task('connectDist', function () {
+  connect.server({
+    root: output.html_files,
+    port: 8888
+  });
+});
+
+/* Watch these files for changes and run the task on update */
+gulp.task('watch', function() {
+  gulp.watch(input.javascript, function() {
+      console.log("javascript changed");
+      gulp.start('scripts');
+  });
+
+  gulp.watch(input.stylesheets, ['styles']);
+  gulp.watch(input.html_files, ['copy-html-files']);
+  gulp.watch(input.image_files, function() {
+      console.log("images changed");
+      gulp.start('copy-images');
+  });
 });
  
- 
-gulp.task('default', ['scripts', 'styles']);
+
+// Default task, build and watch for changes
+gulp.task('default', ['styles', 'scripts', 'copy-html-files', 'copy-bower-components', 'copy-images', 'connectDist', 'watch']);
