@@ -8,9 +8,10 @@
         <title>Responsive Web Design Basic Sample</title>
 
         <link rel="stylesheet" type="text/css" href="css/menu.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
         <link rel="stylesheet" type="text/css" href="css/container.css">
        
+        <script src='js/firebase.js'></script>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -89,7 +90,7 @@
                         </div>
                 </div>
                 <ol class="note" >
-                    <li class="note-item" ng-repeat="note in notes" ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
+                    <li class="note-item" ng-repeat="note in notes track by note.nname" ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
                         <i ng-click="complete(note); playSound();" class="fa fa-square-o icon-black index"></i><span class="note-name">{{note.nname}}</span><span class="description-note"><i class="fa fa-thumb-tack icon-desc"></i><span class="datetime-notice">{{note.ndatestart}}</span><i class="fa fa-star-o icon-desc"></i> </span>                        <span class="progress-bar" style="width:0%;"></span>
                     </li>
 

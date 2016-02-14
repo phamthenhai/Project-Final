@@ -3,8 +3,26 @@ notesApp.controller('MenuSideBar',['$scope', function($scope){
     
 }]);
 notesApp.controller('notes',['$scope', function($scope){
-    var arr = [{nname:'html', ndatestart:'20-12-2015',ndateremind:'18:00, 2-2-2016', nstart:true,comment:'dfdfd'},
-               {nname:'css', ndatestart:'20-12-2015',ndateremind:'18:00, 2-2-2016', nstart:true,comment:'dfdfd'}];
+
+    var arr = [];
+    var myDataRef = new Firebase('https://blistering-inferno-6633.firebaseio.com');
+    //Đoạn code này để add data vào firebase, mình đã add sẵn 2 item vào rồi nên comment lại đoạn này, nếu muốn add thêm
+    // thì làm tương tự là được
+    // var item1 = {nname:'html', ndatestart:'20-12-2015',ndateremind:'18:00, 2-2-2016', nstart:true,comment:'dfdfd'};
+    // var item2 = {nname:'css', ndatestart:'20-12-2015',ndateremind:'18:00, 2-2-2016', nstart:true,comment:'dfdfd'};
+    // myDataRef.push(item1);
+    // myDataRef.push(item2);
+
+    // Phần này dùng để get data trên firebase về, muốn xem data trên firebase thì vào link này: https://blistering-inferno-6633.firebaseio.com
+    myDataRef.on("value", function(snapshot) {
+        snapshot.forEach(function(itemSnap) {
+            arr.push(angular.copy(itemSnap.val()));
+        });
+        $scope.$apply();
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+    
     var arrcomplete = [];
     $scope.notes = arr;
     $scope.arrcompletes = arrcomplete;
