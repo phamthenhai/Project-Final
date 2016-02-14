@@ -2,8 +2,12 @@ body {
   margin: 0;
   padding: 0;
   background-image: url("/app/dist/img/sample.jpg");
+  background-attachment: fixed;
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  overflow: hidden;
+  height: 100%; }
 
 #wrapper {
   margin: 0; }
@@ -83,7 +87,8 @@ body {
   display: block;
   align-items: center;
   border-top: 1px solid #DEDEDE;
-  color: dodgerblue; }
+  color: dodgerblue;
+  background: #F7F7F7; }
 
 .menu-create .icon-black, .menu-create .icon-ring, .menu-create .icon-message {
   color: dodgerblue; }
@@ -93,14 +98,14 @@ body {
   top: 0;
   margin-top: 40px;
   margin-bottom: 40px;
-  float: left;
   padding: 0;
   width: 250px;
-  height: 100%;
+  height: -webkit-calc(100% - 110px);
+  height: -moz-calc(100% - 110px);
+  height: -o-calc(100% - 110px);
   overflow-y: auto;
   overflow-x: hidden;
-  position: relative;
-  display: block; }
+  position: relative; }
 
 /*.sidebar-nav li a{
     margin-left: 6px;
@@ -207,7 +212,7 @@ body {
   font-size: 18px; }
 
 .progress-bar {
-  z-index: 0;
+  z-index: -10;
   top: 0;
   height: 100%;
   width: 0%;
@@ -279,5 +284,24 @@ body {
   margin-left: 80px;
   color: #BAA3AE;
   font-size: 12px; }
+
+.index {
+  z-index: 1000; }
+
+.edit-form {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  border: 0;
+  resize: none;
+  line-height: 30px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  height: 100%; }
+
+.edit-form:focus {
+  outline: none; }
 
 /*# sourceMappingURL=menu.css.map */

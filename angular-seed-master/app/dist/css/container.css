@@ -8,8 +8,7 @@
   transition: all 0.5s ease;
   width: -webkit-calc(100% - 45px);
   width: -moz-calc(100% - 45px);
-  width: -o-calc(100% - 45px);
-  overflow-x: hidden; }
+  width: -o-calc(100% - 45px); }
 
 #page-content-wrapper {
   -webkit-transition: all 0.5s ease;
@@ -18,14 +17,11 @@
   transition: all 0.5s ease;
   position: relative;
   margin-left: 250px;
-  overflow-x: hidden;
-  overflow-y: hidden;
   width: -webkit-calc(100% - 250px);
   width: -moz-calc(100% - 250px);
   width: -o-calc(100% - 250px);
   float: left;
-  z-index: 1001;
-  overflow: hidden; }
+  z-index: 1001; }
 
 .search {
   margin-left: 0px;
@@ -53,7 +49,8 @@
   position: absolute;
   width: 150px;
   float: left;
-  z-index: 1002; }
+  z-index: 1002;
+  background: #668964; }
 
 .new-note {
   width: auto;
@@ -172,5 +169,14 @@ a {
 
 .description-note {
   float: right; }
+
+.scroll-note {
+  top: 0;
+  height: 90vh;
+  padding: 0;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative; }
 
 /*# sourceMappingURL=container.css.map */

@@ -16,6 +16,7 @@ notesApp.controller('notes',['$scope', function($scope){
     }
     $scope.loaddesc = function(notet){
         $scope.note = notet;
+        $scope.editnote = notet.nname;
     }
     
     $scope.doSomething = function(){
