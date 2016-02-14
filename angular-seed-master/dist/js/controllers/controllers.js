@@ -1,3 +1,5 @@
+//https://intense-torch-7697.firebaseio.com
+var myDataRef = new Firebase('https://intense-torch-7697.firebaseio.com/');
 var notesApp = angular.module('notesApp',['ngAudio']);
 notesApp.controller('MenuSideBar',['$scope', function($scope){
     
