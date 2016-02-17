@@ -40,7 +40,7 @@ body {
         width: 40px;
     }*/ }
 
-.menu-primary, .menu-user {
+.menu-primary, .menu-user, .menu-primary-comment {
   height: 40px;
   width: 250px;
   position: relative;
@@ -48,14 +48,14 @@ body {
   line-height: 40px;
   color: #FFF; }
 
-.menu-user {
+.menu-user, .menu-primary-comment {
   background: transparent;
   float: left;
   position: absolute;
   padding-left: 5px;
   padding-top: 4px; }
 
-.menu-user a, .menu-user a span, .menu-user a .avatar {
+.menu-user a, .menu-primary-comment a, .menu-user a span, .menu-primary-comment a span, .menu-user a .avatar, .menu-primary-comment a .avatar {
   float: left; }
 
 .icon, .icon-black, .icon-ring, .icon-message, .icon-desc {
@@ -183,8 +183,7 @@ body {
   -moz-transition: all 0.8s ease;
   -ms-transition: all 0.8s ease;
   transition: all 0.8s ease;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 1001;
   margin-right: -200px;
   float: right; }
@@ -210,7 +209,7 @@ body {
   margin-left: 5px; }
 
 .menu-desc-label {
-  height: 50px;
+  height: auto;
   padding-top: 5px;
   background: #FFF;
   border-bottom: 1px solid #EBEBEB; }
@@ -302,11 +301,80 @@ body {
   border-radius: 3px;
   border: 0;
   resize: none;
-  line-height: 30px;
   overflow: hidden;
-  white-space: pre-wrap;
   word-wrap: break-word;
-  height: 100%; }
+  min-height: 45px;
+  max-height: 150px;
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  width: calc(100% - 80px);
+  margin-top: 7px; }
 
 .edit-form:focus {
   outline: none; }
+
+.dialog-wrapper {
+  position: absolute;
+  top: 25px;
+  left: -webkit-calc(50% - 150px);
+  left: -moz-calc(50% - 150px);
+  left: calc(50% - 150px);
+  width: 300px;
+  height: 50px;
+  z-index: 1040; }
+
+.menu-reminder {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.menu-reminder li {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  background: #FAFAFA;
+  height: 65px;
+  margin-bottom: 4px; }
+
+.icon-reminder {
+  width: 35px;
+  height: 35px;
+  background: #328AD6;
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-top: 12px;
+  margin-left: 10px;
+  color: white; }
+
+.reminder-head, .comment {
+  height: 65px;
+  display: inline;
+  position: absolute;
+  padding-left: 10px;
+  padding-top: 10px; }
+
+.list-comment {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: -webkit-calc(100% - 350px);
+  height: -moz-calc(100% - 350px);
+  height: calc(100% - 350px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative; }
+
+.list-comment li {
+  height: 40px;
+  margin-bottom: 3px;
+  width: 100%; }
+
+.comment {
+  height: 40px;
+  padding-top: 0px;
+  width: 100%;
+  float: left; }
+
+.menu-primary-comment {
+  line-height: 20px; }
