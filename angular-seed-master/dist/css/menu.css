@@ -242,6 +242,12 @@ body {
 .h45 {
   height: 45px; }
 
+.ab li:hover .show-item, .h45:hover .show-item, li:hover .show-item {
+  display: inline; }
+
+.ab .show-item, .h45 .show-item, li .show-item {
+  display: none; }
+
 .title-menu-desc {
   line-height: 40px;
   width: 310px;
@@ -308,7 +314,7 @@ body {
   width: -webkit-calc(100% - 80px);
   width: -moz-calc(100% - 80px);
   width: calc(100% - 80px);
-  margin-top: 7px; }
+  margin-top: 8px; }
 
 .edit-form:focus {
   outline: none; }
@@ -361,8 +367,6 @@ body {
   height: -webkit-calc(100% - 350px);
   height: -moz-calc(100% - 350px);
   height: calc(100% - 350px);
-  overflow-y: auto;
-  overflow-x: hidden;
   position: relative; }
 
 .list-comment li {
@@ -378,3 +382,17 @@ body {
 
 .menu-primary-comment {
   line-height: 20px; }
+
+.datenote {
+  width: -webkit-calc(100% - 0px);
+  width: -moz-calc(100% - 0px);
+  width: calc(100% - 0px);
+  border: 0;
+  padding-left: 5px;
+  background: transparent; }
+
+.datenote:focus {
+  outline: none; }
+
+ul.datetime-picker-dropdown {
+  z-index: 9999; }

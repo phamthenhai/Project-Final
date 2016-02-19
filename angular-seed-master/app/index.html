@@ -13,11 +13,12 @@
         <script src='js/firebase.js'></script>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-        
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.0/ui-bootstrap-tpls.js"></script>
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -26,24 +27,18 @@
         <![endif]-->
     </head>
 
-    <body  ng-controller="notes">
+    <body  ng-controller="notes as ctrl">
         <!--show remind start-->
         <div class="dialog-wrapper">
            <ul class="menu-reminder">
-                <li><span class="fa fa-bell-o icon-reminder"></span>
+                <li ng-repeat="noti in arrN"><span class="fa fa-bell-o icon-reminder"></span>
                     <div class="reminder-head">
                         <span style="font-weight:bold;">Reminder:</span>
                         <br/>
-                        <span>html</span>
+                        <span>{{noti.nname}}</span>
                     </div>
                </li>
-               <li><span class="fa fa-bell-o icon-reminder"></span>
-                    <div class="reminder-head">
-                        <span style="font-weight:bold;">Reminder:</span>
-                        <br/>
-                        <span>html</span>
-                    </div>
-               </li>
+               
             </ul>
         </div>
          <!--show remind end-->
@@ -98,7 +93,7 @@
             <div id="page-content-wrapper">
                 <nav class="head-content ">
                     <div class="label-search">
-                        <h1>123456</h1>
+                        <h1></h1>
                      </div>
                     <div class="more-info">
                         <span style="color:#FFF;" class="fa fa-share-alt-square icon-info" ><br><span>Share</span></span>
@@ -113,23 +108,13 @@
                             </button>
                             <input ng-model="inputnote" my-enter="doSomething()" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
                             <div class="show " >
-
-                                  <div class='input-group' style="  z-index:9999; width:50px; float:left; line-height:30px; border:0;" id='datetimepicker'>
-                                        <input type='text'    style="z-index:-99; width:2px; opacity:0;"/>
-                                        <span class="input-group-addon" style="background:transparent; border:0; width:32px;">
-                                            <span class="glyphicon glyphicon-calendar" style="color:white; background:transparent; border:0;"></span>
-                                        </span>
-                                    </div>
-                                    <i class="fa fa-star-o icon"></i>
-
+                                <span class="glyphicon glyphicon-calendar icon" ng-click="ctrl.openCalendar($event, 'date3')" datetime-picker="mediumDate" ng-model="ctrl.dates.date3" enable-time="false" ng-change="changedate(note)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove"></span>       
+                                <i class="fa fa-star-o icon"></i>
                             </div>
-                    </div>
-                     <div class="form-group">
-
                     </div>
                     <ol class="note" >
                         <li class="note-item" ng-repeat="note in notes " ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
-                            <i ng-click="complete(note); playSound();" class="fa fa-square-o icon-black index"></i>
+                            <i ng-click="complete(note, $index); playSound();" class="fa fa-square-o icon-black index"></i>
                             <span class="note-name">{{note.nname}}</span>
                             <span class="description-note">
                                 <i class="fa fa-thumb-tack icon-desc"></i>
@@ -149,45 +134,47 @@
                             <span class="note-name-complete">{{completed.nname}}</span>
                             <span class="description-note">
                                 <i class="fa fa-thumb-tack icon-desc"></i>
-                                <span class="datetime-notice">05.01.2016</span>
+                                <span class="datetime-notice">{{completed.ndatestart}}</span>
                                 <i class="fa fa-star-o icon-desc"></i> 
                             </span>
                         </li>
                     </ol>
                 </div>
             </div>
-        <!-- /#page-content-wrapper -->
+        <!--#page-content-wrapper -->
         <!--menu-description-->
         <div id="menu-desc" ng-show="divdbldisp">
             <div class="menu-desc-label">
                 <i class="fa fa-square-o icon-black"></i>
                 <span hidden class="note-name">{{note.nname}}</span>
-                <textarea onkeypress="auto_height(this)" maxlength="210"  class="edit-form" ng-model="editnote"></textarea>
+                <textarea onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:3000}" ng-change="updatenname(note)"  class="edit-form" ng-model="editnote"></textarea>
                 <span class="description-note">
                     <i class="fa fa-star-o icon-desc"></i> 
                 </span></div>
-            <div class="body">
-                <div class="h45">
+            <div class="body-desc">
+                <div class="h45"  ng-click="ctrl.openCalendar($event, 'date1')">
                     <span><i class="fa fa-calendar icon-black"></i></span>
                     <div class="title-menu-desc">
-                        <input class="input-note" type="text" placeholder="Set due date">
-                        <i class="fa fa-times icon-black"></i>
+                        <!--<input class="input-note" type="text" placeholder="Set due date">
+                        <i class="fa fa-times icon-black"></i>-->
+                         <p class="input-group">
+                    <input type="text" class="datenote" datetime-picker="mediumDate" ng-model="ctrl.dates.date1" is-open="ctrl.open.date1" enable-time="false" datepicker-options="ctrl.dateOptions" ng-change="changedate(note,ctrl.dates.date1)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Set due date"  disabled />
+                
                     </div>
                 </div>
-                <div class="h45">
+                <div class="h45"  ng-click="ctrl.openCalendar($event, 'date2')">
                     <span><i class="fa fa-clock-o icon-black"></i></span>
                     <div class="title-menu-desc">
-                        <input class="input-note" type="text" placeholder="Remind me">
-                        <i class="fa fa-times icon-black"></i>
+                        <input type="text" class="datenote" datetime-picker ng-model="ctrl.dates.date2" is-open="ctrl.open.date2" enable-time="true" datepicker-options="ctrl.dateOptions" ng-change="changedate2(note,ctrl.dates.date2)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Remind me"  disabled />
                     </div>
                 </div>
                 
                 <div class="ab">
                     <ol class="list-task">
-                        <li ng-repeat="itemlist in itemlists">
-                            <i class="fa fa-check-square-o icon-black"></i>
-                            <span class="note-name"></span>
-                            <i class="fa fa-star-o icon-desc"></i> 
+                        <li draggable="true" ng-repeat="itemlist in note.listitem">
+                            <i ng-class="itemlist.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="checkComplete(note, itemlist)"></i>
+                            <span class="note-name">{{itemlist.itemname}}</span>
+                            <i class="fa fa-times icon-black show-item" style="float:right; margin-right:10px;" ng-click="removeItem(note, itemlist)"></i>
                         </li>
                     </ol>
                 </div>
@@ -195,7 +182,7 @@
                     <span><i class="fa fa-plus icon-black"></i></span>
                     <div class="title-menu-desc">
                         <input class="input-note" ng-model="inputnotelist" my-enter="addlistitem(note)" type="text" placeholder="Add a subtask">
-                        <i class="fa fa-times icon-black"></i>
+                        <i class="fa fa-times icon-black show-item"></i>
                     </div>
                 </div>
                 <div class="h45">
@@ -215,9 +202,9 @@
                         <i class="fa fa-dropbox icon-black"></i>
                     </div>
                 </div>
-            </div>
+            
             <ul class="list-comment">
-                <li ng-repeat="cm in note.comment"><div class="menu-primary-comment">
+                <li draggable="true" ng-repeat="cm in note.comment"><div class="menu-primary-comment">
                     <a href="#"><span class="avatar">k</span> 
                         <div class="comment">
                             <span style="font-weight:bold;">khidauma</span>
@@ -228,18 +215,18 @@
                     </a>
                     </div>
                     <div  style="float:right; right:0; position:absolute; display:inline-block;">
-                        <i class="fa fa-times icon-black" ng-click="removecomment(note,cm)"></i>
+                        <i class="fa fa-times icon-black show-item" ng-click="removecomment(note,cm)"></i>
                     </div>
                 </li>
                 
-            </ul>
+            </ul></div>
             <div class="bottom">
                 <input class="form-control"  ng-model="inputcomment" my-enter="addcomment(note)" type="text" placeholder="Add a comment...">
                 <div class="toggle-menu-desc">
                     <span ng-click="toggledbldisplayclose();">
                         <i class="	glyphicon glyphicon-chevron-right"></i>
                     </span>
-                    <span class="date-task">Created on Wed, January 27</span>
+                    <span class="date-task">Created on {{note.createdate}}</span>
                     <span class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
                 </div>
             </div>
@@ -247,23 +234,13 @@
         <!--end-menu-description-->
         
         <script src="js/jQuery/jquery-1.10.2.min.js"></script>
-        <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+            <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-        <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
         
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.0/ui-bootstrap-tpls.js"></script>
+        <script src="js/datetime-picker.js"></script>
         <script src="js/js.js"></script>
-        <script src="js/angular.js"></script>
-        <script src="js/angular.audio.js"></script>
+        <!--<script src="js/angular.js"></script>-->
         <script src="js/controllers/controllers.js"></script>
-        <script type="text/javascript">
-            $(function () {
-
-                 $('#datetimepicker').datetimepicker({
-                    useCurrent: false //Important! See issue #1075
-                });
-            });
-        </script>
-        </script>
     </body>
 </html>
