@@ -1,0 +1,14 @@
+<li class="note-item" ng-repeat="note in notes " ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
+                            <div data-xng-watcher x='{{note}}'></div>
+                           <div class="note-item-list" style="z-index:999; opacity:1;">
+                             
+                            <i style="z-index:2;" ng-click="complete(note, $index); playSound();" class="fa fa-square-o icon-black index"></i>
+                            <span style="z-index:2;" class="note-name">{{note.nname}}</span>
+                            <span style="z-index:2;" class="description-note">
+                                <i class="fa fa-thumb-tack icon-desc"></i>
+                                <span class="datetime-notice">{{(note.ndatestart === 'Invalid Date' ? " ": note.ndatestart)}}</span>
+                                <i class="fa fa-star-o icon-desc"></i> 
+                            </span>       
+                            </div>                 
+                            
+                        </li>

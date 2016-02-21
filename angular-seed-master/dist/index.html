@@ -73,7 +73,7 @@
                         <span class="label-message" >1</span></a>
                     </li><li>
                        <a href="#"><span class="fa fa-calendar-o icon-black"></span><span class="title">Today</span><span class="label-message" >2</span>
-                        <span class="label-message" >1</span></a>
+                        <span class="label-message" >{{todays.length}}</span></a>
                     </li><li>
                         <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" >2</span>
                         <i class="label-message" >1</i></a>
@@ -107,35 +107,46 @@
                                 <i class="fa fa-plus"></i>
                             </button>
                             <input ng-model="inputnote" my-enter="doSomething()" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
-                            <div class="show " >
-                                <span class="glyphicon glyphicon-calendar icon" ng-click="ctrl.openCalendar($event, 'date3')" datetime-picker="mediumDate" ng-model="ctrl.dates.date3" enable-time="false" ng-change="changedate(note)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove"></span>       
+                            <div class="show ">
+                            
+                                <span datetime-picker="mediumDate" ng-model="ctrl.dates.date3" is-open="ctrl.open.date3" enable-time="false" datepicker-options="ctrl.dateOptions" ng-change="changedate(note,ctrl.dates.date3)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Set due date" class="glyphicon glyphicon-calendar icon" ng-click="ctrl.openCalendar($event, 'date3')"></span>       
                                 <i class="fa fa-star-o icon"></i>
                             </div>
                     </div>
                     <ol class="note" >
                         <li class="note-item" ng-repeat="note in notes " ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
-                            <i ng-click="complete(note, $index); playSound();" class="fa fa-square-o icon-black index"></i>
-                            <span class="note-name">{{note.nname}}</span>
-                            <span class="description-note">
-                                <i class="fa fa-thumb-tack icon-desc"></i>
-                                <span class="datetime-notice">{{note.ndatestart}}</span>
-                                <i class="fa fa-star-o icon-desc"></i> 
-                            </span>                        
-                            <span class="progress-bar" style="width:0%;"></span>
+                            <span class="progress-bar" style=" z-index:0; width:50%;"></span>
+                           <div class="note-item-list" style="z-index:999; opacity:1;">
+                             
+                            <i style="z-index:2;" ng-click="complete(note, $index); playSound();" class="fa fa-square-o icon-black index"></i>
+                            <span style="z-index:2;" class="note-name">{{note.nname}}</span>
+                            <span style="z-index:2;" class="description-note">
+                                <i class="glyphicon glyphicon-pushpin icon-desc" style="font-size:10px;" ng-show="{{note.ndatestart === 'Invalid Date' ? false : true}}"></i>
+                                <i class="fa fa-comments-o icon-desc" ng-show="{{note.comment.length <= 0 ? false : true}}"></i>
+                                <span class="datetime-notice">{{(note.ndatestart === 'Invalid Date' ? " ": note.ndatestart)}}</span>
+                                <i ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
+                            </span>
+                            </div>                 
+                            
                         </li>
-
+                        <!--<notecomplete notevalue="notes"></notecomplete>-->
                     </ol>
                     <div class="show-complete">
                         <a href="#" ng-click='showcomplete()'><span class="title">show completed to-dos</span></a>
                     </div>
                     <ol class="note-complete">
-                        <li ng-show='showcompl' class="note-item-complete"  ng-repeat="completed in arrcompletes">
-                            <i class="fa fa-check-square-o icon-black"  ng-click="recomplete(completed);"></i>
-                            <span class="note-name-complete">{{completed.nname}}</span>
+                        <li ng-show='showcompl' class="note-item-complete"  ng-repeat="completed in arrcompletes" ng-click="loaddesc(completed);" ng-dblclick="toggledbldisplay();">
+                            <i class="fa fa-check-square-o icon-black"  ng-click="complete(completed,$index);"></i>
+                            <span class="note-name-complete" style="line-height:5px;">
+                                <span style=" display:inline; ">
+                                    <span style="line-height:25px; padding-top:5px; 
+    text-decoration: line-through;">{{completed.nname}}</span><br><span  style="line-height:10px; font-size:10px">{{completed.completedate}} by {{completed.namecomplete}}</span></span>
+                                </span>
                             <span class="description-note">
-                                <i class="fa fa-thumb-tack icon-desc"></i>
-                                <span class="datetime-notice">{{completed.ndatestart}}</span>
-                                <i class="fa fa-star-o icon-desc"></i> 
+                                <i class="glyphicon glyphicon-pushpin icon-desc" style="font-size:10px;" ng-show="{{completed.ndatestart === 'Invalid Date' ? false : true}}"></i>
+                                <i class="fa fa-comments-o icon-desc" ng-show="{{completed.comment.length == 0 ? false : true}}"></i>
+                                <span class="datetime-notice">{{(note.ndatestart === 'Invalid Date' ? " ": note.ndatestart)}}</span>
+                                <i  ng-click="checkstart(completed)" ng-class="completed.nstart ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
                             </span>
                         </li>
                     </ol>
@@ -145,11 +156,11 @@
         <!--menu-description-->
         <div id="menu-desc" ng-show="divdbldisp">
             <div class="menu-desc-label">
-                <i class="fa fa-square-o icon-black"></i>
+                <i ng-class="note.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="complete(note, $index)"></i>
                 <span hidden class="note-name">{{note.nname}}</span>
                 <textarea onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:3000}" ng-change="updatenname(note)"  class="edit-form" ng-model="editnote"></textarea>
                 <span class="description-note">
-                    <i class="fa fa-star-o icon-desc"></i> 
+                    <i ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
                 </span></div>
             <div class="body-desc">
                 <div class="h45"  ng-click="ctrl.openCalendar($event, 'date1')">
@@ -227,7 +238,7 @@
                         <i class="	glyphicon glyphicon-chevron-right"></i>
                     </span>
                     <span class="date-task">Created on {{note.createdate}}</span>
-                    <span class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
+                    <span ng-click="removenote(note); toggledbldisplayclose(); " class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
                 </div>
             </div>
         </div>
@@ -242,5 +253,6 @@
         <script src="js/js.js"></script>
         <!--<script src="js/angular.js"></script>-->
         <script src="js/controllers/controllers.js"></script>
+        <script src="js/draganddrop.js"></script>
     </body>
 </html>

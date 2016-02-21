@@ -21,9 +21,9 @@
         margin-right: 0;
         margin-left: 40px;
         @include transition(all 0.5s ease);
-         width: -webkit-calc(100% - 45px); 
-        width:    -moz-calc(100% - 45px); 
-        width:      calc(100% - 45px);
+         width: -webkit-calc(100% - 40px); 
+        width:    -moz-calc(100% - 40px); 
+        width:      calc(100% - 40px);
     
  }
 
@@ -162,10 +162,10 @@
     color:#000;
     line-height: 40px;
     font-size: 16px;
+    position: absolute;
 }
 .note-name-complete{
     @extend .note-name;
-    text-decoration: line-through;
 }
 .note-complete{
     @extend .note;
@@ -185,6 +185,7 @@ a{
     color: crimson;
 }
 .description-note{
+    display: inline;
     float: right;
 }
 .scroll-note{

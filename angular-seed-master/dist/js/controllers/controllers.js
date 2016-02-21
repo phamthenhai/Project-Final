@@ -1,11 +1,12 @@
 //https://intense-torch-7697.firebaseio.com
 
-var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngDragDrop']);
 notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
 
     var arr = [];
     var arr2 = [];
     var arrcomplete = [];
+    var arrtoday = [];
     $scope.ndatest = "";
     var myDataRef = new Firebase('https://intense-torch-7697.firebaseio.com/complete/');
     var myDataRef2 = new Firebase('https://intense-torch-7697.firebaseio.com/complete/');
@@ -42,11 +43,22 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
                             ndateremind:itemSnap.val().ndateremind, 
                             nstart:itemSnap.val().nstart,
                             complete:itemSnap.val().complete,
+                            completedate:itemSnap.val().completedate,
+                            namecomplete:itemSnap.val().namecomplete,
                             createdate:d,
                             listitem:listitemarr,
                             comment:commentarr
                            };
-            if(itemSnap.val().complete === true){
+            var ndate = new Date();
+            var dd2 = new Date(d2);
+            var nndate = new Date(ndate.toDateString());
+            var seconds = (dd2 - nndate);
+        
+        interval = Math.floor(seconds / 86400);
+        if (interval == 0) {
+            arrtoday.push(item);
+        }
+            if(itemSnap.val().complete === false){
                 
                 arr.push(item);
             }
@@ -59,6 +71,56 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     }); 
+    $scope.ndatestartt;
+    var that = this;
+    
+    var in10Days = new Date();
+    in10Days.setDate(in10Days.getDate() + 10);
+    
+    this.dates = {
+        date1: null,
+        date2: null,
+        date3: null,
+        date4: null
+    };
+
+    this.open = {
+        date1: false,
+        date2: false,
+        date3: false,
+        date4: false,
+        date5: false,
+        date6: false,
+        date7: false,
+        date8: false,
+        date9: false,
+        date10: false,
+        date11: false
+    };
+
+    // Disable today selection
+    this.disabled = function(date, mode) {
+        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
+    };
+
+    this.dateOptions = {
+        showWeeks: false,
+        startingDay: 1
+    };
+
+    this.timeOptions = {
+        readonlyInput: false,
+        showMeridian: false
+    };
+
+    this.dateModeOptions = {
+        minMode: 'year',
+        maxMode: 'year'
+    };
+
+    this.openCalendar = function(e, date) {
+        that.open[date] = true;
+    };
     
     $scope.notes = arr;
     $scope.arrcompletes = arrcomplete;
@@ -71,6 +133,17 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
     $scope.loaddesc = function(notet){
         $scope.note = notet;
         $scope.editnote = notet.nname;
+        var nds = new Date(notet.ndatestart);
+        var ndr = new Date(notet.ndateremind);
+        that.dates.date1 = new Date(notet.ndatestart);
+        that.dates.date2 = new Date(notet.ndateremind);
+        if(nds == 'Invalid Date'){
+            that.dates.date1 = null;
+        }
+        if(ndr == 'Invalid Date'){
+            that.dates.date2 = null;
+        }
+        
         
     }
     //tao moi cong viec
@@ -79,10 +152,12 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
         var item = {id:'',
                     nname:$scope.inputnote, 
                     ndatestart:'20-12-2015',
-                    ndateremind:date.toString(), 
+                    ndateremind: " ", 
                     nstart:true,
-                    complete:true,
-                    createdate:date.toString(),
+                    complete:false,
+                    completedate: " ",
+                    namecomplete: " ",
+                    createdate:date.toDateString(),
                     listitem:[],
                     comment:[]
                    };
@@ -96,6 +171,7 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
         arr.push(item);
         $scope.inputnote = '';
     }
+    $scope.todays = arrtoday;
     //
     $scope.updatenname = function(notet){
         notet.nname = $scope.editnote;
@@ -207,6 +283,58 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
             note.listitem[itemlist.id].complete = !itemlist.complete;
         }
     }
+    $scope.dropSuccessHandler = function($event,index,array){
+          arr.splice(index,1);
+
+      };
+      
+      $scope.onDrop = function($event,$data,array){
+          arrcomplete.push($data);
+          console.log($data);
+      };
+    //check start
+    $scope.checkstart = function(note){
+        var date = new Date();
+        var hopperRef = myDataRef.child(note.id+"");
+       
+        hopperRef.child("nstart").set(!note.nstart);
+        if(note.listitem == undefined){
+           // note.push({comment:[{id:'1', commentname:$scope.inputcomment, commentdate:date}]});
+        }
+        else{
+            var idx = -1;
+            for(var i = 0; i < arr.length; i ++){
+                if(arr[i].id === note.id){
+                    idx = i;
+                }
+            }
+            var idx2 = -1;
+            for(var i = 0; i < arrcomplete.length; i ++){
+                if(arrcomplete[i].id === note.id){
+                    idx2 = i;
+                }
+            }
+            if(idx !== -1){
+            arr[idx].nstart = !note.nstart;
+            }
+            else{
+                arrcomplete[idx2].nstart = !note.nstart;
+            }
+        }
+    }
+    //check start
+    $scope.checkstart1 = function(note){
+        var date = new Date();
+        var hopperRef = myDataRef.child(note.id+"");
+       
+        hopperRef.child("nstart").set(!note.nstart);
+        if(note.listitem == undefined){
+           // note.push({comment:[{id:'1', commentname:$scope.inputcomment, commentdate:date}]});
+        }
+        else{
+            note.nstart = !note.nstart;
+        }
+    }
     //xoa itemlist
     $scope.removeItem = function(note, itemlist){
         var date = new Date();
@@ -225,22 +353,97 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
             note.listitem.splice(note.listitem.length-1,1);
         }
     }
+    //xoa note
+    $scope.removenote = function(note){
+        var date = new Date();
+        var hopperRef = myDataRef.child(note.id+"").remove();
+        if(note.listitem == undefined){
+           // note.push({comment:[{id:'1', commentname:$scope.inputcomment, commentdate:date}]});
+        }
+        else{
+            var idx = -1;
+            for(var i = 0; i < arr.length; i ++){
+                if(arr[i].id === note.id){
+                    idx = i;
+                }
+            }
+            var idx2 = -1;
+            for(var i = 0; i < arrcomplete.length; i ++){
+                if(arrcomplete[i].id === note.id){
+                    idx2 = i;
+                }
+            }
+            if(idx !== -1){
+            arr.splice(idx, 1);}
+            else{
+                arrcomplete.splice(idx2, 1);}
+            
+        }
+    }
     //danh dau muc da hoan thanh cong viec
-    $scope.complete = function(note, idx){
+    $scope.checkCompleteNote = function(note, idx){
+        
+        if(note.complete == true){
+           recomplete(note);
+        }
+        else{
+            $scope.complete(note,idx);
+        }
+    } 
+    $scope.complete = function(note, idxr){
         var hopperRef = myDataRef.child(note.id+"");
+        var d = new Date();
+        $scope.note = null;
         hopperRef.child("complete").set(!note.complete);
         if(note.listitem == undefined){
            // note.push({comment:[{id:'1', commentname:$scope.inputcomment, commentdate:date}]});
         }
         else{
             note.complete = !note.complete;
-            arrcomplete.push(note);
-            arr.splice(idx, 1);
+            if(!note.complete){
+               
+                arr.push(note);
+                $scope.note = arr[arr.length-1];
+                var idx = -1;
+                for(var i = 0; i < arrcomplete.length; i ++){
+                    if(arrcomplete[i].id === note.id){
+                        idx = i;
+                    }
+                }
+                arrcomplete.splice(idx, 1);
+                
+                $scope.note = arr[arr.length-1];
+                $scope.loaddesc(arr[arr.length-1]);
+                note.completedate = d.toDateString();
+                note.namecomplete = " ";
+                hopperRef.child("completedate").set(" ");
+                hopperRef.child("namecomplete").set(" ");
+                
+            }
+            else{
+                 arrcomplete.push(note);
+                $scope.note = arrcomplete[arrcomplete.length-1];
+                $scope.$index = arrcomplete.length;
+                var idx = -1;
+                for(var i = 0; i < arr.length; i ++){
+                    if(arr[i].id === note.id){
+                        idx = i;
+                    }
+                }
+                arr.splice(idx, 1);
+                $scope.note = arrcomplete[arrcomplete.length-1];
+                $scope.loaddesc(arrcomplete[arrcomplete.length-1]);
+                note.completedate = d.toDateString();
+                note.namecomplete = "khidauma";
+                hopperRef.child("completedate").set(d.toDateString());
+                hopperRef.child("namecomplete").set("khidauma");
+                
+            }
         }
     } 
     
     //cong viec lam chua dung, can lam lai
-    $scope.recomplete = function(note){
+    $scope.recomplete = function(note,idx){
         
        var hopperRef = myDataRef.child(note.id+"");
         hopperRef.child("complete").set(!note.complete);
@@ -306,57 +509,7 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
      
     }, 1000);
     
-    $scope.ndatestartt;
-    var that = this;
     
-    var in10Days = new Date();
-    in10Days.setDate(in10Days.getDate() + 10);
-    
-    this.dates = {
-        date1: null,
-        date2: null,
-        date3: null,
-        date4: null
-    };
-
-    this.open = {
-        date1: false,
-        date2: false,
-        date3: false,
-        date4: false,
-        date5: false,
-        date6: false,
-        date7: false,
-        date8: false,
-        date9: false,
-        date10: false,
-        date11: false
-    };
-
-    // Disable today selection
-    this.disabled = function(date, mode) {
-        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
-    };
-
-    this.dateOptions = {
-        showWeeks: false,
-        startingDay: 1
-    };
-
-    this.timeOptions = {
-        readonlyInput: false,
-        showMeridian: false
-    };
-
-    this.dateModeOptions = {
-        minMode: 'year',
-        maxMode: 'year'
-    };
-
-    this.openCalendar = function(e, date) {
-        that.open[date] = true;
-    };
-
     
 }]);
 notesApp.directive('myEnter', function () {
@@ -372,3 +525,52 @@ notesApp.directive('myEnter', function () {
         });
     };
 });
+notesApp.directive('notecomplete', function () {
+    return {
+      templateUrl: 'notecomplete.html',
+      restrict: 'E',
+      scope: {
+        notes:"=notevalue"
+      }, link:function($scope, $elm, $attr){
+        $scope.loaddesc = function(notet){
+        $scope.note = notet;
+        $scope.editnote = notet.nname;
+        var nds = new Date(notet.ndatestart);
+        var ndr = new Date(notet.ndateremind);
+        /*that.dates.date1 = new Date(notet.ndatestart);
+        that.dates.date2 = new Date(notet.ndateremind);
+        if(nds == 'Invalid Date'){
+            that.dates.date1 = null;
+        }
+        if(ndr == 'Invalid Date'){
+            that.dates.date2 = null;
+        }*/
+        
+        
+    }
+        
+      }
+    };
+});
+//notesApp.directive('xngWatcher', function () {
+//        return {
+//            template: '<span class="progress-bar" style=" z-index:0; width:{{x}}%;"></span>',
+//            link: function (scope, elm, iAttrs) {
+//                scope.$watch(function () {
+//                    var id = 0;
+//                    if(iAttrs.x == undefined){
+//                        return {x: 0};
+//                    }
+//                    var lis = iAttrs.x.listitem;
+//                    for(var i = 0; i < lis.length; i ++){
+//                        if(lis[i].complete == true){
+//                            id ++;
+//                        }
+//                    }
+//                    var kq = (id / (lis.length) * 100);
+//                    return {x: kq};
+//                }, function (newVal, oldVal, scope) {
+//                    scope.x = newVal.x;
+//                }, false);
+//            }}
+//});

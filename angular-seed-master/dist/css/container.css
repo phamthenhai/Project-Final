@@ -6,9 +6,9 @@
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  width: -webkit-calc(100% - 45px);
-  width: -moz-calc(100% - 45px);
-  width: calc(100% - 45px); }
+  width: -webkit-calc(100% - 40px);
+  width: -moz-calc(100% - 40px);
+  width: calc(100% - 40px); }
 
 #page-content-wrapper {
   -webkit-transition: all 0.5s ease;
@@ -149,10 +149,8 @@
 .note-name, .note-name-complete {
   color: #000;
   line-height: 40px;
-  font-size: 16px; }
-
-.note-name-complete {
-  text-decoration: line-through; }
+  font-size: 16px;
+  position: absolute; }
 
 .note-item-complete {
   opacity: 0.4; }
@@ -168,6 +166,7 @@ a {
   color: crimson; }
 
 .description-note {
+  display: inline;
   float: right; }
 
 .scroll-note {
