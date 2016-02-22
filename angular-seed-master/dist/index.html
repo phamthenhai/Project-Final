@@ -76,7 +76,7 @@
                         <span class="label-message" >{{todays.length}}</span></a>
                     </li><li>
                         <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" >2</span>
-                        <i class="label-message" >1</i></a>
+                        <i class="label-message badge" >1</i></a>
                     </li>
                     
                     
@@ -113,24 +113,7 @@
                                 <i class="fa fa-star-o icon"></i>
                             </div>
                     </div>
-                    <ol class="note" >
-                        <li class="note-item" ng-repeat="note in notes " ng-bind-html-unsafe="note" ng-click="loaddesc(note);" ng-dblclick="toggledbldisplay();">
-                            <span class="progress-bar" style=" z-index:0; width:50%;"></span>
-                           <div class="note-item-list" style="z-index:999; opacity:1;">
-                             
-                            <i style="z-index:2;" ng-click="complete(note, $index); playSound();" class="fa fa-square-o icon-black index"></i>
-                            <span style="z-index:2;" class="note-name">{{note.nname}}</span>
-                            <span style="z-index:2;" class="description-note">
-                                <i class="glyphicon glyphicon-pushpin icon-desc" style="font-size:10px;" ng-show="{{note.ndatestart === 'Invalid Date' ? false : true}}"></i>
-                                <i class="fa fa-comments-o icon-desc" ng-show="{{note.comment.length <= 0 ? false : true}}"></i>
-                                <span class="datetime-notice">{{(note.ndatestart === 'Invalid Date' ? " ": note.ndatestart)}}</span>
-                                <i ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
-                            </span>
-                            </div>                 
-                            
-                        </li>
-                        <!--<notecomplete notevalue="notes"></notecomplete>-->
-                    </ol>
+                    <ol class="note" ><notecomplete notevalue="notes"></notecomplete></ol>
                     <div class="show-complete">
                         <a href="#" ng-click='showcomplete()'><span class="title">show completed to-dos</span></a>
                     </div>
@@ -145,7 +128,7 @@
                             <span class="description-note">
                                 <i class="glyphicon glyphicon-pushpin icon-desc" style="font-size:10px;" ng-show="{{completed.ndatestart === 'Invalid Date' ? false : true}}"></i>
                                 <i class="fa fa-comments-o icon-desc" ng-show="{{completed.comment.length == 0 ? false : true}}"></i>
-                                <span class="datetime-notice">{{(note.ndatestart === 'Invalid Date' ? " ": note.ndatestart)}}</span>
+                                <span class="datetime-notice">{{(completed.ndatestart === 'Invalid Date' ? " ": completed.ndatestart)}}</span>
                                 <i  ng-click="checkstart(completed)" ng-class="completed.nstart ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
                             </span>
                         </li>

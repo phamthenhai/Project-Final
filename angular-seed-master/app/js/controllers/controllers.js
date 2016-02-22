@@ -124,9 +124,7 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
     
     $scope.notes = arr;
     $scope.arrcompletes = arrcomplete;
-    $scope.toggledbldisplay = function () {
-         $scope.divdbldisp = true;
-    }
+    
     $scope.toggledbldisplayclose = function () {
          $scope.divdbldisp = false;
     }
@@ -390,6 +388,9 @@ notesApp.controller('notes',['$scope', '$interval', function($scope,$interval){
             $scope.complete(note,idx);
         }
     } 
+    $scope.toggledbldisplay = function () {
+        $scope.divdbldisp = true;
+    }
     $scope.complete = function(note, idxr){
         var hopperRef = myDataRef.child(note.id+"");
         var d = new Date();
@@ -531,23 +532,23 @@ notesApp.directive('notecomplete', function () {
       restrict: 'E',
       scope: {
         notes:"=notevalue"
-      }, link:function($scope, $elm, $attr){
+        }, link:function($scope, elm, attr){
         $scope.loaddesc = function(notet){
-        $scope.note = notet;
-        $scope.editnote = notet.nname;
-        var nds = new Date(notet.ndatestart);
-        var ndr = new Date(notet.ndateremind);
-        /*that.dates.date1 = new Date(notet.ndatestart);
-        that.dates.date2 = new Date(notet.ndateremind);
-        if(nds == 'Invalid Date'){
-            that.dates.date1 = null;
+            $scope.note = notet;
+            $scope.editnote = notet.nname;
+            var nds = new Date(notet.ndatestart);
+            var ndr = new Date(notet.ndateremind);
+            /*that.dates.date1 = new Date(notet.ndatestart);
+            that.dates.date2 = new Date(notet.ndateremind);
+            if(nds == 'Invalid Date'){
+                that.dates.date1 = null;
+            }
+            if(ndr == 'Invalid Date'){
+                that.dates.date2 = null;
+            }*/
         }
-        if(ndr == 'Invalid Date'){
-            that.dates.date2 = null;
-        }*/
+         $scope.toggledbldisplay();
         
-        
-    }
         
       }
     };
