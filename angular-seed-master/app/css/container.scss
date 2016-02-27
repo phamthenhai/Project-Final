@@ -20,22 +20,30 @@
         position: relative;
         margin-right: 0;
         margin-left: 40px;
-        @include transition(all 0.5s ease);
-         width: -webkit-calc(100% - 40px); 
+        width: -webkit-calc(100% - 40px); 
         width:    -moz-calc(100% - 40px); 
         width:      calc(100% - 40px);
     
  }
-
-#page-content-wrapper {
-    @include transition(all 0.5s ease);
-    position: relative;
-    margin-left:250px;  
-    width: -webkit-calc(100% - 250px); 
-    width:    -moz-calc(100% - 250px); 
-    width:      calc(100% - 250px);
-    float:left;
-    z-index: 1001;
+@media (max-width:500px){
+    #page-content-wrapper {
+        @include transition(all 0.5s ease);
+        position: relative;
+        margin-left:250px;   
+        width: 100%;
+        float:left;
+    }
+}
+@media (min-width:500px){
+    #page-content-wrapper {
+        @include transition(all 0.5s ease);
+        position: relative;
+        margin-left:250px;  
+        width: -webkit-calc(100% - 250px); 
+        width:    -moz-calc(100% - 250px); 
+        width:      calc(100% - 250px);
+        float:left;
+    }
 }
 .search{
     margin-left: 0px;
@@ -63,7 +71,7 @@
     position:absolute; 
     width: 150px;
     float: left;
-    z-index: 1002;
+    z-index: 1001;
     background: #668964;
     
    
@@ -153,6 +161,7 @@
 }
 .show-complete .title{
     color: #FFF;
+    cursor: pointer;
 }
 .show-complete a:hover{
     
@@ -187,6 +196,7 @@ a{
 .description-note{
     display: inline;
     float: right;
+    margin-right:6px;
 }
 .scroll-note{
     top: 0;
@@ -207,4 +217,14 @@ a{
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+}
+.login-form{
+    left: -webkit-calc(50% - 250px); 
+    left:    -moz-calc(50% - 250px); 
+    left:      calc(50% - 250px);
+    position:relative;
+    width:500px;
+    height:250px;
+    @include border-radius(3px);
+    
 }

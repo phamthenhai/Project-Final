@@ -2,26 +2,33 @@
   position: relative;
   margin-right: 0;
   margin-left: 40px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  transition: all 0.5s ease;
   width: -webkit-calc(100% - 40px);
   width: -moz-calc(100% - 40px);
   width: calc(100% - 40px); }
 
-#page-content-wrapper {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  position: relative;
-  margin-left: 250px;
-  width: -webkit-calc(100% - 250px);
-  width: -moz-calc(100% - 250px);
-  width: calc(100% - 250px);
-  float: left;
-  z-index: 1001; }
+@media (max-width: 500px) {
+  #page-content-wrapper {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    position: relative;
+    margin-left: 250px;
+    width: 100%;
+    float: left; } }
+
+@media (min-width: 500px) {
+  #page-content-wrapper {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    position: relative;
+    margin-left: 250px;
+    width: -webkit-calc(100% - 250px);
+    width: -moz-calc(100% - 250px);
+    width: calc(100% - 250px);
+    float: left; } }
 
 .search {
   margin-left: 0px;
@@ -49,7 +56,7 @@
   position: absolute;
   width: 150px;
   float: left;
-  z-index: 1002;
+  z-index: 1001;
   background: #668964; }
 
 .new-note {
@@ -141,7 +148,8 @@
   padding: 5px; }
 
 .show-complete .title {
-  color: #FFF; }
+  color: #FFF;
+  cursor: pointer; }
 
 .show-complete a:hover {
   text-decoration: none; }
@@ -167,7 +175,8 @@ a {
 
 .description-note {
   display: inline;
-  float: right; }
+  float: right;
+  margin-right: 6px; }
 
 .scroll-note {
   top: 0;
@@ -188,3 +197,15 @@ a {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative; }
+
+.login-form {
+  left: -webkit-calc(50% - 250px);
+  left: -moz-calc(50% - 250px);
+  left: calc(50% - 250px);
+  position: relative;
+  width: 500px;
+  height: 250px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px; }

@@ -13,7 +13,8 @@ var	input  = {
       'stylesheets': './app/css/**/*.scss',
       'bower_components': './app/bower_components/**',
       'html_files': './app/**/*.html',
-      'image_files': './app/img/**/*'
+      'image_files': './app/img/**/*',
+      'audio_files': './app/audio/**/*'
     },
 
     output = {
@@ -21,7 +22,8 @@ var	input  = {
       'stylesheets': './dist/css/',
       'bower_components': 'dist/bower_components',
       'html_files': 'dist/',
-      'image_files': 'dist/img/'
+      'image_files': 'dist/img/',
+      'audio_files': 'dist/audio/'
     };
  
  //Minify javascripts
@@ -49,6 +51,11 @@ gulp.task('copy-bower-components', function () {
 gulp.task('copy-html-files', function () {
   gulp.src(input.html_files)
     .pipe(gulp.dest(output.html_files));
+});
+// Copy html files
+gulp.task('copy-audio-files', function () {
+  gulp.src(input.audio_files)
+    .pipe(gulp.dest(output.audio_files));
 });
 // Copy images
 gulp.task('copy-images', function () {
@@ -80,4 +87,4 @@ gulp.task('watch', function() {
  
 
 // Default task, build and watch for changes
-gulp.task('default', ['styles', 'scripts', 'copy-html-files', 'copy-bower-components', 'copy-images', 'connectDist', 'watch']);
+gulp.task('default', ['styles', 'scripts', 'copy-html-files', 'copy-audio-files','copy-bower-components', 'copy-images', 'connectDist', 'watch']);

@@ -1,16 +1,18 @@
-//https://intense-torch-7697.firebaseio.com
+(function () {
+    'use strict';
+ notesApp
+        .controller('homeController', HomeController);
 
-var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngDragDrop', 'ngRoute', 'ngCookies']);
-notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope,myService,$rootScope){
-    ///khai bao
-    var self = this;
+    HomeController.$inject = ['$scope','UserService', '$rootScope', '$interval', 'myService','$location'];
+    function HomeController($scope, UserService, $rootScope , $interval, myService,$location) {
+        var self = this;
     var arr = [];
     var arr2 = [];
     var arrcomplete = [];
     var arrstarter = [];
     var arrNoti = [];
     $scope.starter = true;
-    arrtoday = [];
+    var arrtoday = [];
     $scope.ndatest = "";
     $scope.ndatestartt;
     var that = this;
@@ -78,7 +80,6 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
         console.log("load");
         $scope.$apply();
         myDataRef.off("value");
-        myService.loadbyName(arrAll, "ptn",arrtoday, arrstarter,arr, arrcomplete);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     }); 
@@ -195,7 +196,7 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
         $scope.arrcompletes = arrcomplete;
         $rootScope.dn = true;
         $scope.username = username;       
-        myService.loadbyName(arrAll, $scope.username,arrtoday, arrstarter,arr, arrcomplete)
+        myService.loadbyName(arrAll, $scope.username,arrtoday, arrstarter,arr, arrcomplete);
     }
     $scope.complete = function(note){
         var username = $scope.username;
@@ -231,35 +232,9 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
     }
     $scope.arrN = arrNoti;
     var i = myService.intervalNoti(arr, arrNoti);
-   /* $scope.username = "";
-    $rootScope.dn = false;*/
-    $scope.notes = arr;
-    $scope.arrcompletes = arrcomplete;  
-    
+    $scope.username = "khidauma";
+    $rootScope.dn = true;
+    myService.loadbyName(arrAll, $scope.username,arrtoday, arrstarter,arr, arrcomplete);
+    }
 
-}]);
-//notesApp.config(function($routeProvider) {
-//		$routeProvider
-//			.when('/', {
-//				templateUrl : 'inbox.html'
-//			})
-//            
-//			.when('/starter', {
-//				templateUrl : 'starter.html'
-//			})
-//            .when('/inbox', {
-//				templateUrl : 'inbox.html'
-//			})
-//            .when('/login', {
-//				templateUrl : 'login.html'
-//			})
-//			.when('/today', {
-//				templateUrl : 'today.html'
-//			});
-//	});
-//         
-
-                
-
-
-                
+})();

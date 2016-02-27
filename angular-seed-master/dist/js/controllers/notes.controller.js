@@ -1,7 +1,10 @@
 //https://intense-torch-7697.firebaseio.com
 
-var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngDragDrop', 'ngRoute', 'ngCookies']);
-notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope,myService,$rootScope){
+var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngDragDrop','ngRoute','ngCookies']);
+notesApp.controller('notesController', notes);
+
+    notes.$inject = ['$scope', '$interval', 'myService','$rootScope','$location'] ;  
+function notes($scope,$interval,myService,$rootScope,$location ){
     ///khai bao
     var self = this;
     var arr = [];
@@ -78,7 +81,6 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
         console.log("load");
         $scope.$apply();
         myDataRef.off("value");
-        myService.loadbyName(arrAll, "ptn",arrtoday, arrstarter,arr, arrcomplete);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     }); 
@@ -190,7 +192,7 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
     }
     $scope.login = function (username) {
         
-        //$location.path("/inbox");
+        $location.path("/inbox");
         $scope.notes = arr;
         $scope.arrcompletes = arrcomplete;
         $rootScope.dn = true;
@@ -231,13 +233,11 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
     }
     $scope.arrN = arrNoti;
     var i = myService.intervalNoti(arr, arrNoti);
-   /* $scope.username = "";
-    $rootScope.dn = false;*/
-    $scope.notes = arr;
-    $scope.arrcompletes = arrcomplete;  
+    $scope.username = "";
+    $rootScope.dn = false;
     
 
-}]);
+};
 //notesApp.config(function($routeProvider) {
 //		$routeProvider
 //			.when('/', {

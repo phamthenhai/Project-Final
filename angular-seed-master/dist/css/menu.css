@@ -33,7 +33,7 @@ body {
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 1002;
   margin-left: -250px;
   float: left;
   /*@include media("(max-width:600px)"){
@@ -46,7 +46,8 @@ body {
   position: relative;
   background: #5B7A59;
   line-height: 40px;
-  color: #FFF; }
+  color: #FFF;
+  z-index: 1002; }
 
 .menu-user, .menu-primary-comment {
   background: transparent;
@@ -185,7 +186,7 @@ body {
   -ms-transition: all 0.8s ease;
   transition: all 0.8s ease;
   overflow: hidden;
-  z-index: 1001;
+  z-index: 1003;
   margin-right: -200px;
   float: right; }
 
@@ -207,7 +208,8 @@ body {
 
 .title {
   width: auto;
-  margin-left: 5px; }
+  margin-left: 5px;
+  color: #000; }
 
 .menu-desc-label {
   height: auto;
