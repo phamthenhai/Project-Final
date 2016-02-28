@@ -22,17 +22,18 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
         appendToBody: false,
         showButtonBar: true,
         altInputFormats: [],
-        ngModelOptions: { }
+        ngModelOptions: {}
     })
     .controller('DateTimePickerController', ['$scope', '$element', '$attrs', '$compile', '$parse', '$document', '$timeout', '$uibPosition', 'dateFilter', 'uibDateParser', 'uiDatetimePickerConfig', '$rootScope',
         function (scope, element, attrs, $compile, $parse, $document, $timeout, $uibPosition, dateFilter, uibDateParser, uiDatetimePickerConfig, $rootScope) {
             var dateFormat = uiDatetimePickerConfig.dateFormat,
-                ngModel, ngModelOptions, $popup, cache = {}, watchListeners = [],
+                ngModel, ngModelOptions, $popup, cache = {},
+                watchListeners = [],
                 closeOnDateSelection = angular.isDefined(attrs.closeOnDateSelection) ? scope.$parent.$eval(attrs.closeOnDateSelection) : uiDatetimePickerConfig.closeOnDateSelection,
                 appendToBody = angular.isDefined(attrs.datepickerAppendToBody) ? scope.$parent.$eval(attrs.datepickerAppendToBody) : uiDatetimePickerConfig.appendToBody,
                 altInputFormats = angular.isDefined(attrs.altInputFormats) ? scope.$parent.$eval(attrs.altInputFormats) : uiDatetimePickerConfig.altInputFormats;
 
-            this.init = function(_ngModel) {
+            this.init = function (_ngModel) {
                 ngModel = _ngModel;
                 ngModelOptions = ngModel.$options || uiDatetimePickerConfig.ngModelOptions;
 
@@ -53,7 +54,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     isHtml5DateInput = true;
                 } else {
                     dateFormat = attrs.datepickerPopup || uiDatetimePickerConfig.dateFormat;
-                    attrs.$observe('datetimePicker', function(value) {
+                    attrs.$observe('datetimePicker', function (value) {
                         var newDateFormat = value || uiDatetimePickerConfig.dateFormat;
 
                         if (newDateFormat !== dateFormat) {
@@ -120,7 +121,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     datepickerEl.attr('date-disabled', 'dateDisabled({ date: date, mode: mode })');
                 }
 
-                angular.forEach(['formatDay', 'formatMonth', 'formatYear', 'formatDayHeader', 'formatDayTitle', 'formatMonthTitle', 'showWeeks', 'startingDay', 'yearRows', 'yearColumns'], function(key) {
+                angular.forEach(['formatDay', 'formatMonth', 'formatYear', 'formatDayHeader', 'formatDayTitle', 'formatMonthTitle', 'showWeeks', 'startingDay', 'yearRows', 'yearColumns'], function (key) {
                     if (angular.isDefined(attrs[key])) {
                         datepickerEl.attr(cameltoDash(key), attrs[key]);
                     }
@@ -130,11 +131,11 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     datepickerEl.attr('custom-class', 'customClass({ date: date, mode: mode })');
                 }
 
-                angular.forEach(['minMode', 'maxMode', 'datepickerMode', 'shortcutPropagation'], function(key) {
+                angular.forEach(['minMode', 'maxMode', 'datepickerMode', 'shortcutPropagation'], function (key) {
                     if (attrs[key]) {
                         var getAttribute = $parse(attrs[key]);
 
-                        watchListeners.push(scope.$parent.$watch(getAttribute, function(value) {
+                        watchListeners.push(scope.$parent.$watch(getAttribute, function (value) {
                             scope.watchData[key] = value;
                         }));
                         datepickerEl.attr(cameltoDash(key), 'watchData.' + key);
@@ -142,7 +143,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                         // Propagate changes from datepicker to outside
                         if (key === 'datepickerMode') {
                             var setAttribute = getAttribute.assign;
-                            watchListeners.push(scope.$watch('watchData.' + key, function(value, oldvalue) {
+                            watchListeners.push(scope.$watch('watchData.' + key, function (value, oldvalue) {
                                 if (angular.isFunction(setAttribute) && value !== oldvalue) {
                                     setAttribute(scope.$parent, value);
                                 }
@@ -166,11 +167,11 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                 // watch attrs - NOTE: minDate and maxDate are used with datePicker and timePicker.  By using the minDate and maxDate
                 // with the timePicker, you can dynamically set the min and max time values.  This cannot be done using the min and max values
                 // with the timePickerOptions
-                angular.forEach(['minDate', 'maxDate', 'initDate'], function(key) {
+                angular.forEach(['minDate', 'maxDate', 'initDate'], function (key) {
                     if (attrs[key]) {
                         var getAttribute = $parse(attrs[key]);
 
-                        watchListeners.push(scope.$parent.$watch(getAttribute, function(value) {
+                        watchListeners.push(scope.$parent.$watch(getAttribute, function (value) {
                             scope.watchData[key] = value;
                         }));
                         datepickerEl.attr(cameltoDash(key), 'watchData.' + key);
@@ -189,7 +190,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     ngModel.$$parserName = 'datetime';
                     ngModel.$validators.datetime = validator;
                     ngModel.$parsers.unshift(parseDate);
-                    ngModel.$formatters.push(function(value) {
+                    ngModel.$formatters.push(function (value) {
                         if (ngModel.$isEmpty(value)) {
                             scope.date = value;
                             return value;
@@ -201,14 +202,14 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                         return dateFilter(scope.date, dateFormat);
                     });
                 } else {
-                    ngModel.$formatters.push(function(value) {
+                    ngModel.$formatters.push(function (value) {
                         scope.date = uibDateParser.fromTimezone(value, ngModelOptions.timezone);;
                         return value;
                     });
                 }
 
                 // Detect changes in the view from the text box
-                ngModel.$viewChangeListeners.push(function() {
+                ngModel.$viewChangeListeners.push(function () {
                     scope.date = parseDateString(ngModel.$viewValue);
                 });
 
@@ -284,7 +285,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                         // if time is enabled, swap to timePicker
                         if (scope.enableTime) {
                             // need to delay this, else timePicker never shown
-                            $timeout(function() {
+                            $timeout(function () {
                                 scope.showPicker = 'time';
                             }, 0);
                         } else {
@@ -295,7 +296,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
 
             };
 
-            scope.keydown = function(evt) {
+            scope.keydown = function (evt) {
                 if (evt.which === 27) {
                     scope.close();
                     element[0].focus();
@@ -311,14 +312,14 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     var position = appendToBody ? $uibPosition.offset(element) : $uibPosition.position(element);
 
                     if (appendToBody) {
-                        scope.dropdownStyle.top = (position.top + element.prop('offsetHeight')) +'px';
+                        scope.dropdownStyle.top = (position.top + element.prop('offsetHeight')) + 'px';
                     } else {
                         scope.dropdownStyle.top = undefined;
                     }
 
                     scope.dropdownStyle.left = position.left + 'px';
-
-                    $timeout(function() {
+                    console.log(position.left);
+                    $timeout(function () {
                         scope.$broadcast('uib:datepicker.focus');
                         $document.bind('click', documentClickBind);
                     }, 0, false);
@@ -327,7 +328,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                 }
             });
 
-            scope.isDisabled = function(date) {
+            scope.isDisabled = function (date) {
                 if (date === 'today' || date === 'now') {
                     date = new Date();
                 }
@@ -336,7 +337,7 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                     scope.watchData.maxDate && scope.compare(date, scope.watchData.maxDate) > 0;
             };
 
-            scope.compare = function(date1, date2) {
+            scope.compare = function (date1, date2) {
                 return new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
             };
 
@@ -382,13 +383,15 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
             scope.$on('$destroy', function () {
                 if (scope.isOpen === true) {
                     if (!$rootScope.$$phase) {
-                        scope.$apply(function() {
+                        scope.$apply(function () {
                             scope.close();
                         });
                     }
                 }
 
-                watchListeners.forEach(function(a) { a(); });
+                watchListeners.forEach(function (a) {
+                    a();
+                });
                 $popup.remove();
                 element.unbind('keydown', inputKeydownBind);
                 $document.unbind('click', documentClickBind);
@@ -403,31 +406,33 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
                 var popupContainsTarget = popup.contains !== undefined && popup.contains(evt.target);
 
                 if (scope.isOpen && !(dpContainsTarget || popupContainsTarget)) {
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         scope.isOpen = false;
                     });
                 }
             }
 
-            function inputKeydownBind (evt) {
+            function inputKeydownBind(evt) {
                 if (evt.which === 27 && scope.isOpen) {
                     evt.preventDefault();
                     evt.stopPropagation();
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         scope.close();
                     });
                     element[0].focus();
                 } else if (evt.which === 40 && !scope.isOpen) {
                     evt.preventDefault();
                     evt.stopPropagation();
-                    scope.$apply(function() {
+                    scope.$apply(function () {
                         scope.isOpen = true;
                     });
                 }
             }
 
             function cameltoDash(string) {
-                return string.replace(/([A-Z])/g, function ($1) { return '-' + $1.toLowerCase(); });
+                return string.replace(/([A-Z])/g, function ($1) {
+                    return '-' + $1.toLowerCase();
+                });
             }
 
             function parseDateString(viewValue) {
@@ -525,24 +530,24 @@ angular.module('ui.bootstrap.datetimepicker', ['ui.bootstrap.dateparser', 'ui.bo
         };
     })
 
-    .directive('timePickerWrap', function () {
-        return {
-            restrict: 'EA',
-            replace: true,
-            transclude: true,
-            templateUrl: 'template/time-picker.html'
-        };
-    });
-angular.module('ui.bootstrap.datetimepicker').run(['$templateCache', function($templateCache) {
-  'use strict';
+.directive('timePickerWrap', function () {
+    return {
+        restrict: 'EA',
+        replace: true,
+        transclude: true,
+        templateUrl: 'template/time-picker.html'
+    };
+});
+angular.module('ui.bootstrap.datetimepicker').run(['$templateCache', function ($templateCache) {
+    'use strict';
 
-  $templateCache.put('template/date-picker.html',
-    "<ul ng-if=\"isOpen && showPicker == 'date'\" class=\"dropdown-menu dropdown-menu-left datetime-picker-dropdown\" style=\"z-index:9999;\" ng-style=dropdownStyle style=left:inherit ng-keydown=keydown($event) ng-click=$event.stopPropagation()><li style=\"padding:0 5px 5px 5px\" class=date-picker-menu><div ng-transclude></div></li><li ng-if=showButtonBar style=padding:5px><span class=\"btn-group pull-left\" style=margin-right:10px><button type=button class=\"btn btn-sm btn-info\" ng-click=\"select('today')\" ng-disabled=\"isDisabled('today')\">{{ getText('today') }}</button> <button type=button class=\"btn btn-sm btn-danger\" ng-click=\"select('clear')\">{{ getText('clear') }}</button></span> <span class=\"btn-group pull-right\"><button ng-if=enableTime type=button class=\"btn btn-sm btn-default\" ng-click=\"changePicker($event, 'time')\">{{ getText('time')}}</button> <button type=button class=\"btn btn-sm btn-success\" ng-click=close()>{{ getText('close') }}</button></span></li></ul>"
-  );
+    $templateCache.put('template/date-picker.html',
+        "<ul ng-if=\"isOpen && showPicker == 'date'\" class=\"dropdown-menu dropdown-menu-left datetime-picker-dropdown\" style=\"z-index:9999;\" ng-style=dropdownStyle style=left:inherit ng-keydown=keydown($event) ng-click=$event.stopPropagation()><li style=\"padding:0 5px 5px 5px\" class=date-picker-menu><div ng-transclude></div></li><li ng-if=showButtonBar style=padding:5px><span class=\"btn-group pull-left\" style=margin-right:10px><button type=button class=\"btn btn-sm btn-info\" ng-click=\"select('today')\" ng-disabled=\"isDisabled('today')\">{{ getText('today') }}</button> <button type=button class=\"btn btn-sm btn-danger\" ng-click=\"select('clear')\">{{ getText('clear') }}</button></span> <span class=\"btn-group pull-right\"><button ng-if=enableTime type=button class=\"btn btn-sm btn-default\" ng-click=\"changePicker($event, 'time')\">{{ getText('time')}}</button> <button type=button class=\"btn btn-sm btn-success\" ng-click=close()>{{ getText('close') }}</button></span></li></ul>"
+    );
 
 
-  $templateCache.put('template/time-picker.html',
-    "<ul ng-if=\"isOpen && showPicker == 'time'\" class=\"dropdown-menu dropdown-menu-left datetime-picker-dropdown\" style=\"z-index:9999;\" ng-style=dropdownStyle style=left:inherit ng-keydown=keydown($event) ng-click=$event.stopPropagation()><li style=\"padding:0 5px 5px 5px\" class=time-picker-menu><div ng-transclude></div></li><li ng-if=showButtonBar style=padding:5px><span class=\"btn-group pull-left\" style=margin-right:10px><button type=button class=\"btn btn-sm btn-info\" ng-click=\"select('now')\" ng-disabled=\"isDisabled('now')\">{{ getText('now') }}</button> <button type=button class=\"btn btn-sm btn-danger\" ng-click=\"select('clear')\">{{ getText('clear') }}</button></span> <span class=\"btn-group pull-right\"><button ng-if=enableDate type=button class=\"btn btn-sm btn-default\" ng-click=\"changePicker($event, 'date')\">{{ getText('date')}}</button> <button type=button class=\"btn btn-sm btn-success\" ng-click=close()>{{ getText('close') }}</button></span></li></ul>"
-  );
+    $templateCache.put('template/time-picker.html',
+        "<ul ng-if=\"isOpen && showPicker == 'time'\" class=\"dropdown-menu dropdown-menu-left datetime-picker-dropdown\" style=\"z-index:9999;\" ng-style=dropdownStyle style=left:inherit ng-keydown=keydown($event) ng-click=$event.stopPropagation()><li style=\"padding:0 5px 5px 5px\" class=time-picker-menu><div ng-transclude></div></li><li ng-if=showButtonBar style=padding:5px><span class=\"btn-group pull-left\" style=margin-right:10px><button type=button class=\"btn btn-sm btn-info\" ng-click=\"select('now')\" ng-disabled=\"isDisabled('now')\">{{ getText('now') }}</button> <button type=button class=\"btn btn-sm btn-danger\" ng-click=\"select('clear')\">{{ getText('clear') }}</button></span> <span class=\"btn-group pull-right\"><button ng-if=enableDate type=button class=\"btn btn-sm btn-default\" ng-click=\"changePicker($event, 'date')\">{{ getText('date')}}</button> <button type=button class=\"btn btn-sm btn-success\" ng-click=close()>{{ getText('close') }}</button></span></li></ul>"
+    );
 
 }]);

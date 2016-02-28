@@ -1,0 +1,17 @@
+<div class="new-note" ng-init="starter = true">
+    <button class="btn-search" type="button">
+        <i class="fa fa-plus"></i>
+    </button>
+    <input ng-model="inputnote" my-enter="doSomething(inputnote,starter)" id="input-note" type="text" maxlength="255" placeholder="Add a to do Starter">
+    <div class="show ">
+
+        <span datetime-picker="mediumDate" ng-model="ctrl.dates.date3" is-open="ctrl.open.date3" enable-time="false" datepicker-options="ctrl.dateOptions" ng-change="changedate(note,ctrl.dates.date3)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Set due date" class="glyphicon glyphicon-calendar icon" ng-click="ctrl.openCalendar($event, 'date3')"></span>
+        <i style="color:red; margin-right:18px;" ng-class="starter === true ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc'" ng-model="starter"></i>
+    </div>
+</div>
+<div class="show-complete">
+    <a href="#"><span class="title">Starter</span></a>
+</div>
+<ol class="note">
+    <notecomplete notevalue="starters"></notecomplete>
+</ol>

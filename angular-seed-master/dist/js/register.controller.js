@@ -1,9 +1,10 @@
 (function () {
     'use strict';
-  notesApp
+    notesApp
         .controller('RegisterController', RegisterController);
 
     RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
+
     function RegisterController(UserService, $location, $rootScope, FlashService) {
         var vm = this;
 

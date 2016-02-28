@@ -13,7 +13,7 @@ notesApp.directive('myEnter', function () {
 });
 notesApp.directive('notecomplete', function () {
     return {
-      templateUrl: 'notecomplete.html',
+      templateUrl: 'template/notecomplete.html',
       restrict: 'CE',
       transclude: true,
         replace: true,
@@ -24,7 +24,7 @@ notesApp.directive('notecomplete', function () {
 });
 notesApp.directive('notecompleted', function () {
     return {
-      templateUrl: 'notecompleted.html',
+      templateUrl: 'template/notecompleted.html',
       restrict: 'CE',
         transclude: true,
         replace: true,

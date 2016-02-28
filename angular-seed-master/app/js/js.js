@@ -1,9 +1,25 @@
 $(document).ready(function(){
     $('[data-toggle=offcanvas]').click(function(){
         $('#wrapper').toggleClass('offcanvas');
+        console.log("sdsf");
     });
+    /*$('#menu-toggle').click(function(){
+        $('#wrapper').toggleClass('offcanvas');
+        console.log("sdsf");
+    });*/
+    /*$('#menu-toggle').click(function(){
+        console.log("sdsf");
+        return false;
+    });*/
     sideNav();
     widthDesc();
+    $('#dob').pickadate({
+        format: 'mm/dd/yyyy',
+        formatSubmit: 'mm/dd/yyyy',
+        hiddenName: true
+    });
+
+     
 });
 function sideNav() {
       if ($(window).width() < 700) {
@@ -11,6 +27,16 @@ function sideNav() {
       } else {
         $('#wrapper').removeClass('offcanvas');
       }  
+}
+function sideBar() {
+     /* $('#menu-toggle' ).click(function(){
+        $('#wrapper').toggleClass('offcanvas');
+        console.log("sdsf");
+    });*/
+    $('[data-toggle=offcanvas]').click(function(){
+        $('#wrapper').toggleClass('offcanvas');
+        console.log("sdsf");
+    });
 }
 function widthDesc() {
     var w = $(window).width();

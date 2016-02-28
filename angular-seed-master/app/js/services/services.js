@@ -110,11 +110,12 @@ notesApp.service('myService' ,['$interval', function ($interval) {
     //
     self.changedateService = function(notet,datet,arrtoday){
         var d = "";
+        var dt = new Date(datet);
         if(datet == null || datet.getYear == 1970){
             d = "";
         }
         else{
-            d = datet.toDateString();
+            d = dt.toDateString();
         }
         
         var hopperRef = myDataRef.child(notet.id+"/ndatestart");
@@ -419,7 +420,7 @@ notesApp.service('myService' ,['$interval', function ($interval) {
                             namecomplete:arrAll[i].namecomplete,
                             createdate:d,
                             listitem:listitemarr,
-                            listitem:arrAll[i].listuser,
+                            listuser:arrAll[i].listuser,
                             comment:commentarr
                            };
             var ndate = new Date();

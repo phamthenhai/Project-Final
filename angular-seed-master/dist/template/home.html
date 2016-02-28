@@ -1,0 +1,185 @@
+<!--show remind start-->
+<div class="dialog-wrapper">
+    <ul class="menu-reminder">
+        <li ng-repeat="noti in arrN"><span class="fa fa-bell-o icon-reminder"></span>
+            <div class="reminder-head">
+                <span style="font-weight:bold;">Reminder:</span>
+                <br/>
+                <span>{{noti.nname}}</span>
+            </div>
+            <i style="float:right; right:0; margin:5px;" ng-click="removeNoti(noti, $index)" class="fa fa-times"></i></a>
+        </li>
+
+    </ul>
+</div>
+
+<!--show remind end-->
+<div id="wrapper">
+    <!--offcanvas start-->
+    <div id="sidebar-wrapper">
+        <nav class="menu-primary">
+            <a href="javascript:void(0)"  ng-click="canvasLoad()" data-toggle="offcanvas" id="menu-toggle">
+                <span class="fa fa-bars icon"></span>
+            </a>
+            <span>
+                        <input id="search-input" type="search">
+                        <span class="fa fa-search  icon search"></span>
+            </span>
+        </nav>
+        <div class="menu-user">
+            <a href="#"><span class="avatar">k</span> <span class="title" id="user-name" >khidauma</span>
+                        <span class="fa fa-angle-down icon-black"></span>
+                        </a>
+            <span class="fa fa-comment-o icon-message"></span>
+            <span class="fa fa-bell-o icon-ring"></span>
+
+        </div>
+        <ul class="sidebar-nav" id="menu">
+            <li ng-click="showInbox();">
+                <a href="javascript:void(0)"><span class="fa fa-inbox icon-black"></span><span class="title">Inbox</span></a><span class="label-message"></span>
+                <span class="label-message">{{notes.length}}</span>
+            </li>
+            <li ng-click="showStarter();" ng-show="starters.length > 0 ? true : false">
+                <a href="javascript:void(0)"><span class="fa fa-star-o icon-black"></span><span class="title">Starred</span><span class="label-message" ></span>
+                        <span class="label-message" >{{starters.length}}</span></a>
+            </li>
+            <li ng-click="showToday();" ng-show="todays.length > 0 ? true : false">
+                <a href="javascript:void(0)"><span style="font-size:20px;" class="fa fa-calendar-o icon-black"><span style="font-size:10px; position:relative; margin-left:-16px;">{{todayStr}}</span></span><span class="title">Today</span><span class="label-message" ></span>
+                        <span class="label-message" >{{todays.length}}</span></a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" ></span>
+                        <i class="label-message badge" >1</i></a>
+            </li>
+
+
+
+        </ul>
+        
+        <div class="menu-create">
+            
+            <a href="#">
+                <span class="fa fa-plus icon-black"></span><span class="title">Create list</span>
+            </a>
+        </div>
+    </div>
+    <!--offcanvas end-->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="head-content ">
+            <div class="label-search">
+                <h1></h1>
+            </div>
+            <div class="more-info">
+                <span style="color:#FFF;" class="fa fa-share-alt-square icon-info"><br><span>Share</span></span>
+                <span style="color:#FFF;" class="fa fa-sort-alpha-asc icon-info"><br><span>Sort</span></span>
+                <span style="color:#FFF;" class="fa fa-ellipsis-h icon-info"><br><span>More</span></span>
+            </div>
+        </nav>
+        <input type="text" ng-click="ABC()" id="datepicker">
+        <div class="scroll-note">
+            <span ng-show="showstarter"><div ng-include="'template/starter.html'"></div></span>
+            <span ng-show="showinbox"><div ng-include="'template/inbox.html'"></div></span>
+            <span ng-show="showtoday"><div ng-include="'template/today.html'"></div></span>
+             
+        </div>
+    </div>
+    <!--#page-content-wrapper 
+        <!--menu-description-->
+    <div id="menu-desc" ng-show="divdbldisp">
+        <div class="menu-desc-label">
+            <i style="font-size:20px; " ng-class="note.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="complete(note, $index)"></i>
+            <span hidden class="note-name">{{note.nname}}</span>
+            <textarea onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:3000}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
+            <span class="description-note">
+                    <i  ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc' " style="color:red; margin-right:8px;font-size:20px;"></i> 
+                </span></div>
+        <div class="body-desc">
+            <div class="h45" ng-click="ctrl.openCalendar($event, 'date1')">
+                <span><i class="fa fa-calendar icon-black"></i></span>
+                <div class="title-menu-desc">
+                    <!--<input class="input-note" type="text" placeholder="Set due date">
+                        <i class="fa fa-times icon-black"></i>-->
+                    <p class="input-group">
+                        <!--<input type="text" class="datenote" datetime-picker="mediumDate" ng-model="ctrl.dates.date1" is-open="ctrl.open.date1" enable-time="false" datepicker-options="ctrl.dateOptions" ng-change="changedate(note,ctrl.dates.date1)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Set due date" disabled />-->
+                        <input type="text" ng-model="ctrl.dates.date1" name="dob1" ng-change="changedate(note,ctrl.dates.date1)" id="dob1" />
+                        
+
+                </div>
+            </div>
+            <div class="h45" ng-click="ctrl.openCalendar($event, 'date2')">
+                <span><i class="fa fa-clock-o icon-black"></i></span>
+                <div class="title-menu-desc">
+                    <!--<input type="text" class="datenote" datetime-picker ng-model="ctrl.dates.date2" is-open="ctrl.open.date2" enable-time="true" datepicker-options="ctrl.dateOptions" ng-change="changedate2(note,ctrl.dates.date2)" date-disabled="ctrl.disabled(date, mode)" close-on-date-selection="false" datepicker-append-to-body="true" clear-text="Remove" placeholder="Remind me" disabled />-->
+                    <!--<input style="position:absolute;" type="text"   name="dob" id="dob" />--><input type="text"  name="time1"   id="time1" />
+                </div>
+            </div>
+
+            <div class="ab">
+                <ol class="list-task">
+                    <li draggable="true" ng-repeat="itemlist in note.listitem">
+                        <i ng-class="itemlist.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="checkComplete(note, itemlist)"></i>
+                        <span class="note-name">{{itemlist.itemname}}</span>
+                        <i class="fa fa-times icon-black show-item" style="float:right; margin-right:10px;" ng-click="removeItem(note, itemlist)"></i>
+                    </li>
+                </ol>
+            </div>
+            <div class="h45">
+                <span><i class="fa fa-plus icon-black"></i></span>
+                <div class="title-menu-desc">
+                    <input class="input-note" ng-model="inputnotelist" my-enter="addlistitem(note)" type="text" placeholder="Add a subtask">
+                    <i class="fa fa-times icon-black show-item"></i>
+                </div>
+            </div>
+            <div class="h45">
+                <span><i class="fa fa-pencil-square-o icon-black"></i></span>
+                <div class="title-menu-desc">
+                    <span><input class="input-note" type="text" placeholder="Add a note"></span>
+                    <i class="fa fa-external-link icon-black"></i>
+                </div>
+            </div>
+            <div class="h45">
+                <span><i class="fa fa-paperclip icon-black"></i></span>
+                <div class="title-menu-desc">
+                    <span>
+                            <input class="input-file" type="text" placeholder="Add a file">
+                        </span>
+                    <i class="fa fa-microphone icon-black"></i>
+                    <i class="fa fa-dropbox icon-black"></i>
+                </div>
+            </div>
+
+            <ul class="list-comment">
+                <li draggable="true" ng-repeat="cm in note.comment">
+                    <div class="menu-primary-comment">
+                        <a href="#"><span class="avatar">k</span> 
+                        <div class="comment">
+                            <span style="font-weight:bold;">khidauma</span>
+                            <span style="font-size:12px;color:#7384A8; margin-left:5px;">{{timeSince(cm.commentdate)}}</span>
+                            <br/>
+                            <span>{{cm.commentname}}</span>
+                        </div> 
+                    </a>
+                    </div>
+                    <div style="float:right; right:0; position:absolute; display:inline-block;">
+                        <i class="fa fa-times icon-black show-item" ng-click="removecomment(note,cm)"></i>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="bottom">
+            <input class="form-control" ng-model="inputcomment" my-enter="addcomment(note)" type="text" placeholder="Add a comment...">
+            <div class="toggle-menu-desc">
+                <span ng-click="toggledbldisplayclose();">
+                        <i class="	glyphicon glyphicon-chevron-right"></i>
+                    </span>
+                <span class="date-task">Created on {{note.createdate}}</span>
+                <span ng-click="removenote(note); toggledbldisplayclose(); " class="glyphicon glyphicon-trash" style="float:right; line-height:30px;"></span>
+            </div>
+        </div>
+    </div>
+    <audio id="audio1">
+        <source src="audio/wl3-complete.OGG" type="audio/ogg"></source>
+        Your browser isn't invited for super fun audio time.
+    </audio>

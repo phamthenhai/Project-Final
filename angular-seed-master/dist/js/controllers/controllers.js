@@ -1,7 +1,7 @@
 //https://intense-torch-7697.firebaseio.com
 
-var notesApp = angular.module('notesApp',['ui.bootstrap', 'ui.bootstrap.datetimepicker','ngDragDrop', 'ngRoute', 'ngCookies']);
-notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope,myService,$rootScope){
+var notesApp = angular.module('notesApp', ['ui.bootstrap', 'ui.bootstrap.datetimepicker', 'ngDragDrop', 'ngRoute', 'ngCookies']);
+notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($scope, myService, $rootScope) {
     ///khai bao
     var self = this;
     var arr = [];
@@ -18,8 +18,45 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
     $scope.showinbox = true;
     $scope.showtoday = false;
     var in10Days = new Date();
+    /*$('[data-toggle=offcanvas]').click(function(){
+        $('#wrapper').toggleClass('offcanvas');
+       
+    });*/
+    /*$('#menu-toggle').click(function(){
+        $('#wrapper').toggleClass('offcanvas');
+        console.log("sdsf");
+    });*/
+    /*$('#menu-toggle').click(function(){
+        console.log("sdsf");
+        return false;
+    });*/
+    sideNav();
+    widthDesc();
+    /*$('#dob').pickadate({
+        format: 'mm/dd/yyyy',
+        formatSubmit: 'mm/dd/yyyy',
+        hiddenName: true
+    });*/
+    $('#dob').pickadate({
+      weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+      showMonthsShort: true
+    }) ;
+    $('#dob1').pickadate({
+      weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+      showMonthsShort: true
+    });
+    $('#time1').pickatime({
+    interval: 1
+});
+    $scope.canvasLoad = function(){
+        $('#wrapper').toggleClass('offcanvas');
+    }
+    if(in10Days.getDate() < 10){
+        $scope.todayStr = " "+in10Days.getDate()+" ";
+    }else{
+        $scope.todayStr = in10Days.getDate();
+    }
     in10Days.setDate(in10Days.getDate() + 10);
-    
     this.dates = {
         date1: null,
         date2: null,
@@ -116,150 +153,130 @@ notesApp.controller('notes',['$scope', 'myService','$rootScope', function($scope
         
         
     }
-    //tao moi cong viec
-    $scope.doSomething = function(inputnote,starter){
+    $scope.ABC = function(){
+        $('.datepicker').pickadate();
+        console.log("sf");
+    }
+        //tao moi cong viec
+    $scope.doSomething = function (inputnote, starter) {
         var date = new Date();
-        var item = {id:'',
-                    nname:inputnote, 
-                    ndatestart:'20-12-2015',
-                    ndateremind: " ", 
-                    nstart:starter,
-                    complete:false,
-                    completedate: " ",
-                    namecomplete: " ",
-                    createdate:date.toDateString(),
-                    listitem:[],
-                    listuser:[$rootScope.username],
-                    comment:[]
-                   };
-        
-        myService.doSomething(item, arr,arrstarter); 
+        var item = {
+            id: '',
+            nname: inputnote,
+            ndatestart: '20-12-2015',
+            ndateremind: " ",
+            nstart: starter,
+            complete: false,
+            completedate: " ",
+            namecomplete: " ",
+            createdate: date.toDateString(),
+            listitem: [],
+            listuser: [$rootScope.username],
+            comment: []
+        };
+
+        myService.doSomething(item, arr, arrstarter);
         $scope.inputnote1 = '';
     }
     $scope.todays = arrtoday;
     $scope.starters = arrstarter;
-    
+
     //
-    $scope.updatenname = function(notet){
-        myService.updatennameService(notet,$scope.editnote);
+    $scope.updatenname = function (notet) {
+            myService.updatennameService(notet, $scope.editnote);
+        }
+        //
+    $scope.changedate = function (notet, datet) {
+            myService.changedateService(notet, datet, arrtoday);
+        }
+        //
+    $scope.changedate2 = function (notet, datet) {
+            myService.changedate2Service(notet, datet);
+
+        }
+        //them moi commment
+    $scope.addcomment = function (note) {
+            myService.addcomment(note, $scope.inputcomment)
+            $scope.inputcomment = '';
+        }
+        //them moi mot itemlist
+    $scope.addlistitem = function (note) {
+            myService.addlistitemService(note, $scope.inputnotelist);
+            $scope.inputnotelist = '';
+        }
+        //xoa comment
+    $scope.removecomment = function (note, cmt) {
+            myService.removecomment(note, cmt);
+            $scope.inputcomment = '';
+        }
+        //check itemlist
+    $scope.checkComplete = function (note, itemlist) {
+            myService.checkCompleteService(note, itemlist);
+        }
+        //check start
+    $scope.checkstart = function (note) {
+        myService.checkstartService(note, arrcomplete, arr, arrstarter);
     }
-    //
-    $scope.changedate = function(notet,datet){
-        myService.changedateService(notet,datet,arrtoday);
-    }
-    //
-    $scope.changedate2 = function(notet,datet){
-        myService.changedate2Service(notet,datet);
-       
-    }
-    //them moi commment
-    $scope.addcomment = function(note){
-        myService.addcomment(note,$scope.inputcomment)
-        $scope.inputcomment = '';
-    }
-    //them moi mot itemlist
-    $scope.addlistitem = function(note){
-        myService.addlistitemService(note, $scope.inputnotelist);
-        $scope.inputnotelist = '';
-    }
-    //xoa comment
-    $scope.removecomment = function(note, cmt){
-        myService.removecomment(note, cmt);
-        $scope.inputcomment = '';
-    }
-    //check itemlist
-    $scope.checkComplete = function(note, itemlist){
-        myService.checkCompleteService(note, itemlist);
-    }
-    //check start
-    $scope.checkstart = function(note){
-        myService.checkstartService(note,arrcomplete,arr, arrstarter);
-    }
-   
+
     //xoa itemlist
-    $scope.removeItem = function(note, itemlist){
-        myService.removeItemService(note, itemlist);
+    $scope.removeItem = function (note, itemlist) {
+            myService.removeItemService(note, itemlist);
+        }
+        //xoa note
+    $scope.removenote = function (note) {
+        myService.removenoteService(note, arrcomplete, arr, arrstarter, arrtoday);
     }
-    //xoa note
-    $scope.removenote = function(note){
-        myService.removenoteService(note, arrcomplete, arr,arrstarter, arrtoday);
-    }
-    
+
     $scope.toggledbldisplay = function () {
         $scope.divdbldisp = true;
     }
     $scope.login = function (username) {
-        
+
         //$location.path("/inbox");
         $scope.notes = arr;
         $scope.arrcompletes = arrcomplete;
         $rootScope.dn = true;
-        $scope.username = username;       
-        myService.loadbyName(arrAll, $scope.username,arrtoday, arrstarter,arr, arrcomplete)
+        $scope.username = username;
+        myService.loadbyName(arrAll, $scope.username, arrtoday, arrstarter, arr, arrcomplete)
     }
-    $scope.complete = function(note){
+    $scope.complete = function (note) {
         var username = $scope.username;
-        myService.completeService(note, arrcomplete, arr,arrstarter,arrtoday, username);
+        myService.completeService(note, arrcomplete, arr, arrstarter, arrtoday, username);
         $scope.loaddesc(note);
-    } 
-    $scope.rightMenu = function(note){
-        console.log(note.nname);
-    } 
-    
-   
-    //cho phep hien thi nhung cong viec da hoan thanh
-    $scope.showcomplete = function(){
-        if($scope.showcompl == true){
-            $scope.showcompl = false;
-        }
-        else{
-            $scope.showcompl = true;
-        }
     }
-    //hien thi thoi gian comment so voi thoi gian hien tai
-    $scope.timeSince = function(date){
+    $scope.rightMenu = function (note) {
+        console.log(note.nname);
+    }
+
+
+    //cho phep hien thi nhung cong viec da hoan thanh
+    $scope.showcomplete = function () {
+            if ($scope.showcompl == true) {
+                $scope.showcompl = false;
+            } else {
+                $scope.showcompl = true;
+            }
+        }
+        //hien thi thoi gian comment so voi thoi gian hien tai
+    $scope.timeSince = function (date) {
         return myService.timeSinceService(date);
     }
-    $scope.removeNoti = function(item, idx){
+    $scope.removeNoti = function (item, idx) {
         arrNoti.splice(idx, 1);
     }
-    
-    
-    $scope.playSound = function(){
+
+
+    $scope.playSound = function () {
         var audio = document.getElementById("audio1");
         audio.play();
     }
     $scope.arrN = arrNoti;
     var i = myService.intervalNoti(arr, arrNoti);
-   /* $scope.username = "";
-    $rootScope.dn = false;*/
+    /* $scope.username = "";
+     $rootScope.dn = false;*/
     $scope.notes = arr;
-    $scope.arrcompletes = arrcomplete;  
-    
+    $scope.arrcompletes = arrcomplete;
+    $rootScope.username = "ptn";
 
 }]);
-//notesApp.config(function($routeProvider) {
-//		$routeProvider
-//			.when('/', {
-//				templateUrl : 'inbox.html'
-//			})
-//            
-//			.when('/starter', {
-//				templateUrl : 'starter.html'
-//			})
-//            .when('/inbox', {
-//				templateUrl : 'inbox.html'
-//			})
-//            .when('/login', {
-//				templateUrl : 'login.html'
-//			})
-//			.when('/today', {
-//				templateUrl : 'today.html'
-//			});
-//	});
-//         
 
-                
-
-
-                

@@ -7,20 +7,22 @@
     config.$inject = ['$routeProvider', '$locationProvider'];
     function config($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/starter', {
+            .when('/home', {
                 controller: 'notes',
-                templateUrl: 'home.html'
+                templateUrl: 'template/home.html',
+            controllerAs: 'ctrl'
             })
+            
 
             .when('/login', {
                 controller: 'LoginController',
-                templateUrl: 'login.view.html',
+                templateUrl: 'template/login.view.html',
                 controllerAs: 'vm'
             })
 
             .when('/register', {
                 controller: 'RegisterController',
-                templateUrl: 'register.view.html',
+                templateUrl: 'template/register.view.html',
                 controllerAs: 'vm'
             })
 
