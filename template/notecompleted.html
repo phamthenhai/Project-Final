@@ -1,0 +1,18 @@
+<li ng-show='showcompl' class="note-item-complete"  ng-repeat="completed in arrcompletes" ng-click=" loaddesc(completed);" ng-dblclick="toggledbldisplay(); loaddesc(completed);">
+    <i class="fa fa-check-square-o icon-black"  ng-click="complete(completed,$index);"></i>
+    <span class="note-name-complete" style="line-height:5px;">
+        <span style=" display:inline; ">
+            <span style="line-height:25px; padding-top:5px; 
+        text-decoration: line-through;">{{completed.nname}}</span>
+            <br>
+            <span  style="line-height:10px; font-size:10px">{{completed.completedate}} by {{completed.namecomplete}}</span>
+        </span>
+    </span>
+    <span class="description-note">
+        <i class="glyphicon glyphicon-pushpin icon-desc" style="font-size:10px;" ng-show="{{completed.ndatestart === 'Invalid Date' ? false : true}}"></i>
+        <i class="fa fa-comments-o icon-desc" ng-show="{{completed.comment.length == 0 ? false : true}}"></i>
+        <span class="datetime-notice">{{(completed.ndatestart === 'Invalid Date' ? " ": completed.ndatestart)}}</span>
+        <i  ng-click=" checkstart(completed)" ng-class="completed.nstart === false ? 'fa fa-star-o icon-desc' : 'fa fa-star icon-desc'" style="color:red; margin-right:18px;"></i> 
+        <span class="fa fa-sliders icon-desc" style="color:red;" ng-click="$parent.loaddesc(completed); toggledbldisplay();"></span>
+    </span>
+ </li> 
