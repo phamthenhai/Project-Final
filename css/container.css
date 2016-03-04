@@ -46,6 +46,9 @@
 .head-content .label-search {
   float: left; }
 
+.label-search h1 {
+  font-size: 24px; }
+
 .head-content h1 {
   margin: 0;
   padding: 5px;

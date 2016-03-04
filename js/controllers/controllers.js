@@ -11,6 +11,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     var arrNoti = [];
     $scope.repeat = 0;
     $scope.starter = true;
+    $scope.headname = "Inbox";
     arrtoday = [];
     $scope.starter = false;
     $scope.ndatest = "";
@@ -88,7 +89,6 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         minMode: 'year',
         maxMode: 'year'
     };
-
     this.openCalendar = function (e, date) {
         that.open[date] = true;
     };
@@ -105,7 +105,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         console.log("load");
         $scope.$apply();
         myDataRef.off("value");
-        myService.loadbyName(arrAll, "ptn", arrtoday, arrstarter, arr, arrcomplete);
+        myService.loadbyName(arrAll, $rootScope.username, arrtoday, arrstarter, arr, arrcomplete);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
@@ -113,6 +113,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         $scope.showstarter = false;
         $scope.starter = false;
         $scope.date5 = "";
+        $scope.headname = "Inbox";
         $scope.showinbox = true;
         $scope.showtoday = false;
     }
@@ -122,6 +123,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         $scope.showstarter = true;
         $scope.showinbox = false;
         $scope.showtoday = false;
+        $scope.headname = "Starter";
     }
     $scope.showToday = function () {
         var d = new Date();
@@ -130,6 +132,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         $scope.showstarter = false;
         $scope.showinbox = false;
         $scope.showtoday = true;
+        $scope.headname = "Today";
     }
     $scope.toggledbldisplayclose = function () {
         $scope.divdbldisp = false;
@@ -187,7 +190,10 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     }
     $scope.convertDate = function (d) {
         var datet = new Date(d);
-        return datet.getDate() + "." + (datet.getMonth() + 1) + "." + (1900 + datet.getYear());
+        if (datet === " " || datet === 'Invalid Date' || datet === ''){
+            return datet.getDate() + "." + (datet.getMonth() + 1) + "." + (1900 + datet.getYear());
+        }
+        return " ";
     }
     $scope.ABC = function () {
             $('.datepicker').pickadate();
@@ -230,7 +236,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         }
         var strdate = new Date(startdate);
         var str = " ";
-        if (strdate == 'Invalid Date' || strdate === ' ') {
+        if (strdate == 'Invalid Date' || strdate === ' ' || strdate === '') {
             strdate = " ";
             if (parseInt(repeatt) > 0) {
                 strdate = new Date();
@@ -269,7 +275,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
             
         }
         else{
-            $scope.starter = true;
+            $scope.starter = false;
         }
         $scope.date6 = "";
         $scope.time3 = "";
@@ -351,6 +357,9 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         myService.changedate2Service(notet, datet);
 
     }
+    $scope.ktcommentname = function(name){
+        return name.charAt(0);
+    }
     $scope.changedate3 = function (datet1, datet2) {
             var datet = " ";
             var str = datet2;
@@ -428,6 +437,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     $scope.toggledbldisplay = function () {
         $scope.divdbldisp = true;
     }
+    $scope.shareuserlist = [];
     $scope.login = function (username) {
         //$location.path("/inbox");
         $scope.notes = arr;
@@ -435,6 +445,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         $rootScope.dn = true;
         $scope.username = username;
         myService.loadbyName(arrAll, $scope.username, arrtoday, arrstarter, arr, arrcomplete)
+        
     }
     $scope.complete = function (note) {
         var username = $scope.username;
@@ -490,8 +501,9 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
      $rootScope.dn = false;*/
     $scope.notes = arr;
     $scope.arrcompletes = arrcomplete;
-    $rootScope.username = "ptn";
-
+    $rootScope.username = $rootScope.globals.currentUser.username;
+    $rootScope.ktusername = $rootScope.username.charAt(0);
+    
     var api_picker_open = $('#api_picker_open').pickadate({}),
         api_calendar_open = api_picker_open.data('pickadate'),
         api_button_open = $('#api_button_open').on({
@@ -570,5 +582,10 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     $("#sharenote").click(function () {
         $("#sharenotelist").toggle();
     });
-
+var a = ['ptn', 'user', 'guest', 'khidauma'];
+        for(var i = 0; i < 4; i ++){
+            if(a[i] !== $rootScope.username){
+                $scope.shareuserlist.push(a[i]);
+            }
+        }
 }]);

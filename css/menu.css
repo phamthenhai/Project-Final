@@ -1,14 +1,15 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("../img/06.jpg");
+  background-image: url("../img/6.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  font-family: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif; }
 
 #wrapper {
   margin: 0; }
@@ -151,7 +152,7 @@ body {
   background: #14C8B4;
   color: #FFF;
   padding-left: 12px;
-  line-height: 35px;
+  line-height: 30px;
   font-weight: bold;
   font-size: 15px;
   -webkit-border-radius: 50%;

@@ -85,7 +85,7 @@
             </span>
         </nav>
         <div class="menu-user">
-            <a href="#"><span class="avatar">k</span> <span class="title" id="user-name" >khidauma</span>
+            <a href="#"><span class="avatar">{{ktusername}}</span> <span class="title" id="user-name" >{{username}}</span>
                         <span class="fa fa-angle-down icon-black"></span>
                         </a>
             <span class="fa fa-comment-o icon-message"></span>
@@ -107,7 +107,7 @@
             </li>
             <li>
                 <a href="#"><span class="fa fa-calendar icon-black"></span><span class="title">Week</span><span class="label-message" ></span>
-                        <i class="label-message badge" >1</i></a>
+                        <i class="label-message" >1</i></a>
             </li>
 
 
@@ -126,7 +126,7 @@
     <div id="page-content-wrapper">
         <nav class="head-content ">
             <div class="label-search">
-                <h1></h1>
+                <h1>{{headname}}</h1>
             </div>
             <div class="more-info">
                 <span class="fa fa-share-alt-square icon-info white "><br><span>Share</span></span>
@@ -220,19 +220,19 @@
                 </div>
             </div>
             <div class="ab">
-                <ol class="list-task" id="sharenotelist">
+                <ol class="list-task" ng-repeat=" user in shareuserlist" id="sharenotelist">
                     <li>
-                        <i ng-class="loadchecksharenote(note, 'khidauma') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'khidauma')"></i>
-                        <span class="note-name">3</span>
+                        <i ng-class="loadchecksharenote(note, user) ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,user)"></i>
+                        <span class="note-name">{{user}}</span>
                     </li>
-                    <li>
+                    <!--<li>
                         <i ng-class="loadchecksharenote(note, 'user') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'user')"></i>
                         <span class="note-name">3</span>
                     </li>
                     <li>
                         <i ng-class="loadchecksharenote(note, 'guest') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'guest')"></i>
                         <span class="note-name">3</span>
-                    </li>
+                    </li>-->
                 </ol>
             </div>
             <div class="h45">
@@ -249,7 +249,7 @@
             <ul class="list-comment">
                 <li draggable="true" ng-repeat="cm in note.comment">
                     <div class="menu-primary-comment">
-                        <a href="#"><span class="avatar">k</span> 
+                        <a href="#"><span class="avatar">{{ktcommentname(cm.username)}}</span> 
                         <div class="comment">
                             <span class="commentname" >{{cm.username}}</span>
                             <span class="commenttime"  >{{timeSince(cm.commentdate)}}</span>
