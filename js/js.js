@@ -51,9 +51,16 @@ function auto_height(element){
     element.style.height = (element.scrollHeight)+"px";
     var newheight = $('.body-desc').height - (element.scrollHeight + 40);
     $('.body-desc').css("height", newheight);
+    var text = document.getElementById('ip').value.replace(/\s+$/g,"") 
+ var split = text.split("\n") 
+ console.log( split.length );
 }
 
 $(window).resize(function() {
    sideNav();
     widthDesc();
+    var t = $('.body-desc').outerHeight();
+        var t1 = $('#ip').outerHeight();
+        var t3 = $(window).height();
+        $('.body-desc').css("height", t3-t1-100);
 });

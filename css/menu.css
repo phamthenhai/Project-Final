@@ -6,7 +6,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: visible;
+  overflow: hidden;
   height: 100%;
   width: 100%; }
 
@@ -332,7 +332,9 @@ li .show-item {
 }*/
 .title-menu-desc, .title-menu-desc1, .title-menu-desc2 {
   line-height: 40px;
-  width: 310px;
+  width: -webkit-calc(100% - 40px);
+  width: -moz-calc(100% - 40px);
+  width: calc(100% - 0px);
   border-bottom: 1px solid #EBEBEB;
   margin-left: 40px;
   height: 45px; }
@@ -347,17 +349,25 @@ li .show-item {
 .title-menu-desc2 {
   height: 45px; }
 
-.input-file, .input-note {
+.input-file, .input-note, #api_buttonstartdate1_open {
   border: 0;
   float: left;
-  width: 220px;
+  width: -webkit-calc(100% - 120px);
+  width: -moz-calc(100% - 120px);
+  width: calc(100% - 120px);
   background: transparent;
   padding-left: 5px; }
 
-.input-note {
-  width: 260px; }
+.icon-right {
+  float: right;
+  display: inline-block; }
 
-.input-file:hover, .input-note:hover {
+.input-note, #api_buttonstartdate1_open {
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  width: calc(100% - 80px); }
+
+.input-file:hover, .input-note:hover, #api_buttonstartdate1_open:hover {
   outline: none; }
 
 .bottom {
@@ -527,8 +537,11 @@ ul.datetime-picker-dropdown {
   -webkit-backface-visibility: visible; }
 
 .dateremind {
-  width: 45%;
+  width: 40%;
   float: left; }
+
+.iconsize24 {
+  font-size: 24px; }
 
 .label-icon {
   font-size: 10px;

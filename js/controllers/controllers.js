@@ -1,6 +1,6 @@
 //https://intense-torch-7697.firebaseio.com
 
-var notesApp = angular.module('notesApp', [ 'ngRoute', 'ngCookies']);
+var notesApp = angular.module('notesApp', ['ngRoute', 'ngCookies']);
 notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($scope, myService, $rootScope) {
     ///khai bao
     var self = this;
@@ -100,16 +100,6 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     var myDataRef = new Firebase('https://intense-torch-7697.firebaseio.com/complete/');
     myDataRef.on("value", function (snapshot) {
         snapshot.forEach(function (itemSnap) {
-            /* if($scope.username == "" || $scope.username == undefined){
-                 return;
-             }
-             var ibl = false;
-             for(var i = 0; i < arrAll[i].listuser.length; i ++){
-                 if(arrAll[i].listuser[i] === $scope.username){
-                     ibl = true;
-                 }
-             }
-             if(ibl === true){*/
             arrAll.push(itemSnap.val());
         });
         console.log("load");
@@ -121,15 +111,22 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     });
     $scope.showInbox = function () {
         $scope.showstarter = false;
+        $scope.starter = false;
+        $scope.date5 = "";
         $scope.showinbox = true;
         $scope.showtoday = false;
     }
     $scope.showStarter = function () {
+        $scope.starter = true;
+        $scope.date5 = "";
         $scope.showstarter = true;
         $scope.showinbox = false;
         $scope.showtoday = false;
     }
     $scope.showToday = function () {
+        var d = new Date();
+        $scope.starter = false;
+        $scope.date5 = d.toDateString();
         $scope.showstarter = false;
         $scope.showinbox = false;
         $scope.showtoday = true;
@@ -179,10 +176,18 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
             $scope.time1 = strtime;
         }
 
-
+        $('#ip').css("height", notet.nname.length);
+        var t = $('.body-desc').outerHeight();
+        var t1 = $('#ip').outerHeight();
+        var t3 = $(window).height();
+        $('.body-desc').css("height", t3 - t1 - 100);
     }
     $scope.changeStarter = function () {
         $scope.starter = !$scope.starter;
+    }
+    $scope.convertDate = function (d) {
+        var datet = new Date(d);
+        return datet.getDate() + "." + (datet.getMonth() + 1) + "." + (1900 + datet.getYear());
     }
     $scope.ABC = function () {
             $('.datepicker').pickadate();
@@ -224,24 +229,24 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
             //$scope.datet7 = datet.toDateString();
         }
         var strdate = new Date(startdate);
-         var str = " ";
+        var str = " ";
         if (strdate == 'Invalid Date' || strdate === ' ') {
             strdate = " ";
             if (parseInt(repeatt) > 0) {
                 strdate = new Date();
                 str = strdate.toDateString();
-            }else{
+            } else {
                 str = " ";
             }
-        }else{
-            tr = strdate.toDateString();
+        } else {
+            str = strdate.toDateString();
         }
-        
+
 
         var item = {
             id: '',
             nname: inputnote,
-            ndatestart: str ,
+            ndatestart: str,
             ndateremind: datet.toString(),
             nstart: starter,
             repeat: repeatt,
@@ -256,36 +261,49 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
 
         myService.doSomething(item, arr, arrstarter);
         $scope.inputnote1 = '';
-        $scope.date5 = "";
+        if($scope.showtoday === true){
+            
+        }
+        else{$scope.date5 = "";}
+        if($scope.showstarter === true){
+            
+        }
+        else{
+            $scope.starter = true;
+        }
         $scope.date6 = "";
         $scope.time3 = "";
         $scope.repeat = 0;
     }
-    $scope.checkrepeat = function(){
+    $scope.checkrepeat = function () {
         var strdate = new Date($scope.date1);
-        if (strdate == 'Invalid Date' || strdate === ' ' ||strdate == undefined) {
+        if (strdate == 'Invalid Date' || strdate === ' ' || strdate == undefined) {
             if (parseInt($scope.repeat) > 0) {
                 strdate = new Date();
                 $scope.date1 = strdate.toDateString();
             }
         }
     }
-    $scope.checkrepeat2 = function(){
+    $scope.checkrepeat2 = function () {
         var strdate = new Date($scope.date5);
-        if (strdate == 'Invalid Date' || strdate === ' ' ||strdate == undefined) {
+        if (strdate == 'Invalid Date' || strdate === ' ' || strdate == undefined) {
             if (parseInt($scope.repeat2) > 0) {
                 strdate = new Date();
                 $scope.date5 = strdate.toDateString();
             }
         }
     }
+    $scope.af = function (e) {
+        auto_height1(e);
+
+    }
     $scope.todays = arrtoday;
     $scope.starters = arrstarter;
 
     //
     $scope.updatenname = function (notet) {
-            myService.updatennameService(notet, $scope.editnote);
-        }
+        myService.updatennameService(notet, $scope.editnote);
+    }
         //
     $scope.changedate = function (notet, datet) {
             myService.changedateService(notet, datet, arrtoday);
@@ -376,7 +394,7 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         }
         //them moi commment
     $scope.addcomment = function (note) {
-            myService.addcomment(note, $scope.inputcomment,$rootScope.username)
+            myService.addcomment(note, $scope.inputcomment, $rootScope.username)
             $scope.inputcomment = '';
         }
         //them moi mot itemlist
@@ -411,7 +429,6 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         $scope.divdbldisp = true;
     }
     $scope.login = function (username) {
-
         //$location.path("/inbox");
         $scope.notes = arr;
         $scope.arrcompletes = arrcomplete;
@@ -427,7 +444,6 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     $scope.rightMenu = function (note) {
         console.log(note.nname);
     }
-
 
     //cho phep hien thi nhung cong viec da hoan thanh
     $scope.showcomplete = function () {
@@ -450,19 +466,19 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
         var audio = document.getElementById("audio1");
         audio.play();
     }
-    $scope.sharenote = function(note, user){
+    $scope.sharenote = function (note, user) {
         myService.shareuserService(note, user);
     }
-    $scope.loadchecksharenote = function(notet, user){
-        if(notet == undefined){
+    $scope.loadchecksharenote = function (notet, user) {
+        if (notet == undefined) {
             return false;
         }
         var list = notet.listuser;
-        if(list == undefined){
+        if (list == undefined) {
             return false;
         }
-        for(var i = 0; i < list.length; i ++){
-            if(list[i] === user){
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] === user) {
                 return true;
             }
         }
@@ -547,11 +563,11 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     $scope.date6 = "";
     $scope.time3 = "";
     $("#repeatp").hide();
-     $("#repeat").click(function(){
+    $("#repeat").click(function () {
         $("#repeatp").toggle();
     });
     $("#sharenotelist").hide();
-     $("#sharenote").click(function(){
+    $("#sharenote").click(function () {
         $("#sharenotelist").toggle();
     });
 

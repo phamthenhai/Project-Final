@@ -3,16 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
 
     <title>Responsive Web Design Basic Sample</title>
-    
+
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="bower_components/sass-bootstrap-glyphicons/css/bootstrap-glyphicons.css" />
-
     <link rel="stylesheet" href="bower_components/pickadate/lib/compressed/themes/default.css">
     <link rel="stylesheet" href="bower_components/pickadate/lib/compressed/themes/default.date.css">
     <link rel="stylesheet" href="bower_components/pickadate/lib/compressed/themes/default.time.css">
@@ -26,34 +25,9 @@
     <script type="text/javascript" src="bower_components/pickadate/lib/compressed/picker.date.js"></script>
     <script type="text/javascript" src="bower_components/pickadate/lib/compressed/picker.time.js"></script>
     <script type="text/javascript" src="bower_components/pickadate/lib/compressed/legacy.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/container.css">
-    <style>
-        .form-control[readonly] {
-            cursor: pointer;
-        }
-        
-        .progress-bar {
-            z-index: -10;
-            top: 0;
-            height: 100%;
-            width: 0%;
-            display: block;
-            position: absolute;
-            -webkit-transition: width 225ms ease;
-            -moz-transition: width 225ms ease;
-            -o-transition: width 225ms ease;
-            -ms-transition: width 225ms ease;
-            transition: width 225ms ease;
-            border-right-width: 1px;
-            border-right-style: solid;
-            opacity: 0.08;
-            float: left;
-            @include border-radius(3px);
-            background: #EFF3EF;
-        }
-
-    </style>
 
 </head>
 
@@ -66,7 +40,6 @@
     <script src="js/controllers/controllers.js"></script>
     <script src="js/services/services.js"></script>
     <script src="js/directives/directive.js"></script>
-    <script src="js/draganddrop.js"></script>
     <script src="js/app.js"></script>
     <script src="js/authentication.service.js"></script>
     <script src="js/flash.service.js"></script>

@@ -5,7 +5,7 @@
             <div class="reminder-head">
                 <span>Reminder:</span>
                 <br/>
-                <span>{{noti.nname}}</span>
+                <span class="remind-name">{{noti.nname}}</span>
             </div>
             <i ng-click="removeNoti(noti, $index)" class="fa fa-times"></i></a>
         </li>
@@ -25,7 +25,7 @@
             <div class="modal-body">
 
                 <h4>Set start date:</h4>
-                <input readonly class="form-control" id="api_buttonstartdate2_open" placeholder="Set due date" type="text" ng-model="date1">
+                <input readonly class="form-control" id="api_buttonstartdate2_open" placeholder="Set due date" type="text" ng-model="date5">
                 <h5>
                                 <input type="radio" checked name="optradio" ng-click="checkrepeat()" ng-model="repeat" value="0"> No repeat</h5>
                 <h5>
@@ -49,7 +49,28 @@
     </div>
 </div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <div class="comment-name">{{note.nname}}</div>
+                <div >
+                    <div style="width:49%; display:inline-block;">
+                        <button type="button" class="btn btn-default btn-block"  ng-click="removenote(note); toggledbldisplayclose(); " data-dismiss="modal">Delete</button>
+                    </div>
+                    <div  style="width:49%; display:inline-block;">
+                        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="wrapper">
     <!--offcanvas start-->
@@ -116,7 +137,7 @@
         <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>-->
         <div class="scroll-note">
             <div class="new-note">
-                <button class="btn-search" type="button">
+                <button ng-click="doSomething(inputnote, starter,date5, date6, time3, repeat)" class="btn-search" type="button">
                     <i class="fa fa-plus"></i>
                 </button>
                 <input ng-model="inputnote" my-enter="doSomething(inputnote, starter,date5, date6, time3, repeat)" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
@@ -137,8 +158,8 @@
     <div id="menu-desc" ng-show="divdbldisp">
         <div class="menu-desc-label">
             <i ng-class="note.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="complete(note, $index)"></i>
-            <span hidden class="note-name">{{note.nname}}</span>
-            <textarea onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:2000}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
+            <!--<span hidden class="note-name">{{note.nname}}</span>-->
+            <textarea id="ip" onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:2000}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
             <span class="description-note">
                     <i  ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc' " ></i> 
                 </span></div>
@@ -163,8 +184,8 @@
                 <span><i class="fa fa-calendar-check-o icon-black"></i></span>
                 <div class="title-menu-desc2">
                     <input class="dateremind" id="api_button_open" type="text" placeholder="Date remind" ng-model="date7">
-                    <span class="fa fa-circle-thin icon-black"><span class="label-icon small-label"  >00:00</span></span>
-                    <input class="dateremind" style="width:25%" id="api_buttontime_open1" type="text" placeholder="Time Remind" ng-model="time1">
+                    <i class="material-icons icon-black iconsize24">alarm</i>
+                    <input class="dateremind" style="width:28%" id="api_buttontime_open1" type="text" placeholder="Time Remind" ng-model="time1">
                     <i class="fa fa-times icon-black show-item" ng-click="changedate2(note, ' ', ' ')"></i>
                 </div>
             </div>
@@ -203,17 +224,14 @@
                     <li>
                         <i ng-class="loadchecksharenote(note, 'khidauma') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'khidauma')"></i>
                         <span class="note-name">3</span>
-                        <i class="fa fa-times icon-black show-item"></i>
                     </li>
                     <li>
                         <i ng-class="loadchecksharenote(note, 'user') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'user')"></i>
                         <span class="note-name">3</span>
-                        <i class="fa fa-times icon-black show-item"></i>
                     </li>
                     <li>
                         <i ng-class="loadchecksharenote(note, 'guest') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'guest')"></i>
                         <span class="note-name">3</span>
-                        <i class="fa fa-times icon-black show-item"></i>
                     </li>
                 </ol>
             </div>
@@ -223,8 +241,8 @@
                     <span>
                             <input class="input-file" type="text" placeholder="Add a file">
                         </span>
-                    <i class="fa fa-microphone icon-black"></i>
-                    <i class="fa fa-dropbox icon-black"></i>
+                    <i class="fa fa-microphone icon-black "></i>
+                    <i class="fa fa-dropbox icon-black "></i>
                 </div>
             </div>
 
@@ -236,7 +254,7 @@
                             <span class="commentname" >{{cm.username}}</span>
                             <span class="commenttime"  >{{timeSince(cm.commentdate)}}</span>
                             <br/>
-                            <span>{{cm.commentname}}</span>
+                            <span class="comment-name">{{cm.commentname}}</span>
                         </div> 
                     </a>
                     </div>
@@ -254,7 +272,7 @@
                         <i class="	glyphicon glyphicon-chevron-right"></i>
                     </span>
                 <span class="date-task">Created on {{note.createdate}}</span>
-                <span ng-click="removenote(note); toggledbldisplayclose(); " class="glyphicon glyphicon-trash"></span>
+                <span data-toggle="modal" data-target="#myModal1" class="glyphicon glyphicon-trash"></span>
             </div>
         </div>
     </div>
