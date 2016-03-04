@@ -1,14 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../img/06.jpg");
+    background-image: url("../img/6.jpg"); 
     background-attachment: fixed;
-    background-position: center;
+    background-position: center; 
     background-repeat: no-repeat;
     background-size: cover;
-    overflow: visible;
+    overflow: hidden; 
     height: 100%;
     width: 100%;
+    font-family: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
 }
 @mixin transition($transition) {
     -webkit-transition: $transition;
@@ -168,7 +169,7 @@ body {
     background: #14C8B4;
     color: #FFF;
     padding-left: 12px;
-    line-height: 35px;
+    line-height: 30px;
     font-weight: bold;
     font-size: 15px;
     @include border-radius(50%);
@@ -202,12 +203,17 @@ body {
 .icon-info span {
     font-size: 10px;
 }
-.icremovecomment{
-    float:right; right:0; position:absolute; display:inline-block;
+.icremovecomment {
+    float: right;
+    right: 0;
+    position: absolute;
+    display: inline-block;
 }
-.glyphicon-trash{
-    float:right; line-height:30px;
+.glyphicon-trash {
+    float: right;
+    line-height: 30px;
 }
+
 /*menu description*/
 
 #menu-desc {
@@ -222,13 +228,14 @@ body {
     margin-right: -200px;
     float: right;
 }
-.description-note i{
-    color:red; margin-right:8px;font-size:20px;
+.description-note i {
+    color: red;
+    margin-right: 8px;
+    font-size: 20px;
 }
-.title-menu-desc2 i{
+.title-menu-desc2 i {
     margin-right: 2px;
 }
-
 .label-message {
     float: right;
     font-size: 10px;
@@ -314,12 +321,15 @@ li .show-item {
     display: none;
     font-size: 12px;
 }
-.labeldatesmall{
-    font-size:10px; position:relative; margin-left:-16px;
+.labeldatesmall {
+    font-size: 10px;
+    position: relative;
+    margin-left: -16px;
 }
-.reminder-head span:firt-child{
+.reminder-head span:firt-child {
     font-weight: bold;
 }
+
 /*
  .show #calen, .show #starter {
     display: none;
@@ -327,14 +337,16 @@ li .show-item {
 
 .title-menu-desc {
     line-height: 40px;
-    width: 310px;
+    width: -webkit-calc(100% - 40px);
+    width: -moz-calc(100% - 40px);
+    width: calc(100% - 0px);
     border-bottom: 1px solid #EBEBEB;
     margin-left: 40px;
     height: 45px;
 }
-.title-menu-desc .shareuser{
+.title-menu-desc .shareuser {
     cursor: pointer;
-    color:#A9B0C3;
+    color: #A9B0C3;
 }
 .title-menu-desc1 {
     @extend .title-menu-desc;
@@ -347,13 +359,21 @@ li .show-item {
 .input-file {
     border: 0;
     float: left;
-    width: 220px;
+    width: -webkit-calc(100% - 120px);
+    width: -moz-calc(100% - 120px);
+    width: calc(100% - 120px);
     background: transparent;
     padding-left: 5px;
 }
-.input-note {
+.icon-right{
+    float:right;
+    display: inline-block;
+}
+.input-note,#api_buttonstartdate1_open {
     @extend .input-file;
-    width: 260px;
+    width: -webkit-calc(100% - 80px);
+    width: -moz-calc(100% - 80px);
+    width: calc(100% - 80px);
 }
 .input-file:hover {
     outline: none;
@@ -522,8 +542,11 @@ ul.datetime-picker-dropdown {
 }
 .dateremind {
     @extend .datenote;
-    width: 45%;
+    width: 40%;
     float: left;
+}
+.iconsize24 {
+    font-size: 24px;
 }
 .label-icon {
     font-size: 10px;
@@ -545,14 +568,14 @@ ul.datetime-picker-dropdown {
 .fa-star-o.icon-black {
     color: #DB4C3F;
 }
-.fa-circle-thin{
+.fa-circle-thin {
     font-size: 25px;
 }
 .fa-calendar-o.icon-black {
     color: #5FA004;
     margin-left: 2px;
 }
-.small-label{
+.small-label {
     font-size: 7px;
     margin-bottom: 10px;
 }

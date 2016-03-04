@@ -1,106 +1,110 @@
-@mixin transition($transition){
-    -webkit-transition:$transition;
-    -moz-transition:$transition;
-    -ms-transition:$transition;
-    transition:$transition;
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    transition: $transition;
 }
-@mixin border-radius($radius){
-    -webkit-border-radius:$radius;
-    -moz-border-radius:$radius;
-    -ms-border-radius:$radius;
-    border-radius:$radius;
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
 }
-@mixin media($queryString){
-    @media #{$queryString}{
+@mixin media($queryString) {
+    @media #{$queryString} {
         @content;
     }
 }
-
 #wrapper.offcanvas #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-        margin-left: 40px;
-        width: -webkit-calc(100% - 40px); 
-        width:    -moz-calc(100% - 40px); 
-        width:      calc(100% - 40px);
-    
- }
-@media (max-width:500px){
+    position: relative;
+    margin-right: 0;
+    margin-left: 40px;
+    width: -webkit-calc(100% - 40px);
+    width: -moz-calc(100% - 40px);
+    width: calc(100% - 40px);
+    overflow: visible;
+}
+@media (max-width:500px) {
     #page-content-wrapper {
-  
         position: relative;
-        margin-left:40px;   
-        width: 100%;
-        float:left;
+        margin-left: 40px;
+        float: left;
+        width: -webkit-calc(100% - 40px);
+        width: -moz-calc(100% - 40px);
+        width: calc(100% - 40px);
+        overflow: hidden;
     }
 }
-@media (min-width:500px){
+@media (min-width:500px) {
     #page-content-wrapper {
         @include transition(all 0.5s ease);
         position: relative;
-        margin-left:250px;  
-        width: -webkit-calc(100% - 250px); 
-        width:    -moz-calc(100% - 250px); 
-        width:      calc(100% - 250px);
-        float:left;
+        margin-left: 250px;
+        width: -webkit-calc(100% - 250px);
+        width: -moz-calc(100% - 250px);
+        width: calc(100% - 250px);
+        float: left;
+        overflow: visible;
     }
 }
-.search{
+.search {
     margin-left: 0px;
     margin-right: 0;
 }
-.head-content{
+.head-content {
     background: #668964;
     height: 40px;
     float: left;
     position: relative;
     width: 100%;
-    z-index: 1001; 
+    z-index: 1001;
 }
-.head-content .label-search{
-    float:left;
+.head-content .label-search {
+    float: left;
 }
-.head-content h1{
-    margin: 0; 
+.label-search h1{
+    font-size: 24px;
+}
+.head-content h1 {
+    margin: 0;
     padding: 5px;
     color: #FFF;
 }
-.more-info{
+.more-info {
     right: 0;
     margin: 0;
-    position:absolute; 
+    position: absolute;
     width: 150px;
     float: left;
     z-index: 1001;
     background: #668964;
-    
-   
-}.new-note{
+}
+.new-note {
     width: auto;
     margin-left: 20px;
-    margin-right:20px;
+    margin-right: 20px;
     height: 45px;
     margin-top: 40px;
     background: #668964;
     border-radius: 5px;
 }
-.note-item{
+.note-item {
     width: auto;
     margin-left: 20px;
-    margin-right:20px;
+    margin-right: 20px;
     height: 45px;
     background: #FFF;
     @include border-radius(3px);
     margin-top: 1px;
     padding-top: 5px;
     position: relative;
-    color: #FFF;line-height: 40px;
+    color: #FFF;
+    line-height: 40px;
 }
-.note-item input{
-    height: 20px;
-   
+.note-item input {
+    height: 40px;
 }
-#input-note{
+#input-note {
     border: 0;
     background: #668964;
     margin-top: 6px;
@@ -110,44 +114,45 @@
     outline: none;
     font-size: 18px;
     margin-right: 0px;
+    text-overflow: ellipsis;
     padding-right: 0px;
-   width: calc(100% - 150px); 
+    width: -webkit-calc(100% - 150px);
+    width: -moz-calc(100% - 150px);
+    width: calc(100% - 150px);
 }
-
-.icon-new-note{
+.icon-new-note {
     float: left;
 }
-.icon-new-note i{
+.icon-new-note i {
     margin: 0;
     padding: 0;
     height: 10px;
     weight: 10px;
 }
-.btn-search{
+.btn-search {
     margin: 5px;
     height: 40px;
     width: 40px;
     background: #668964;
     color: #FFF;
     opacity: 0.7;
-    border:0;
+    border: 0;
     float: left;
 }
-.show{
+.show {
     float: right;
     height: 20px;
-    padding-top: 4px;
+    display: inline-block;
 }
-.note{
+.note {
     margin-top: 20px;
     list-style: none;
     margin-left: 0;
     padding: 0;
 }
-
-.show-complete{
+.show-complete {
     text-transform: uppercase;
-    color:#FFF;
+    color: #FFF;
     background-color: #668964;
     opacity: 0.8;
     margin-top: 20px;
@@ -155,76 +160,127 @@
     width: 180px;
     @include border-radius(3px);
     margin-left: 20px;
-    margin-right:20px;
+    margin-right: 20px;
     font-size: 11px;
     padding: 5px;
 }
-.show-complete .title{
+.show-complete .title {
     color: #FFF;
     cursor: pointer;
 }
-.show-complete a:hover{
-    
+.show-complete a:hover {
     text-decoration: none;
 }
-.note-name{
-    color:#000;
+.note-name {
+    color: #000;
     line-height: 40px;
+    height: 40px;
     font-size: 16px;
-    position: absolute;
+    background: transparent;
+    border: 0;
+    height: 40px;
+    width: -webkit-calc(100% - 170px);
+    width: -moz-calc(100% - 170px);
+    width: calc(100% - 170px);
+    display: inline-block;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
 }
-.note-name-complete{
+.completed-by{
+    @extend .note-name;
+    line-height:10px; height:10px;width:100%; font-size:10px;
+}
+.completed-by{
+    @extend .note-name;
+    line-height:10px; height:10px;width:100%; font-size:10px;
+}
+.comment-name{
+    @extend .note-name;
+    line-height:20px; height:20px;width:100%; font-size:14px;
+}
+.remind-name{
+    @extend .note-name;
+    width:220px;
+    line-height:20px; height:20px; font-size:14px;
+}
+.note-name-complete {
     @extend .note-name;
 }
-.note-complete{
+.note-complete {
     @extend .note;
 }
-.note-item-complete{
+.note-item-complete {
     @extend .note-item;
     opacity: 0.4;
 }
-a{
+a {
     text-decoration: none;
 }
-#input-note:hover{
+#input-note:hover {
     outline: none;
 }
-.datetime-notice{
+.datetime-notice {
     font-size: 10px;
     color: crimson;
 }
-.description-note{
-    display: inline;
+.description-note {
+    display: inline-block;
     float: right;
-    margin-right:6px;
+    z-index: 9;
+    margin-top: -5px;
+    margin-right: 6px;
+    overflow-x: visible;
 }
-.scroll-note{
+.scroll-note {
     top: 0;
-    height: 90vh;
+    height: -webkit-calc(100vh - 40px);
+    height: -moz-calc(100vh - 40px);
+    height: calc(100vh - 40px);
+    padding: 0;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: visible;
+    position: relative;
+}
+.body-desc {
+    top: 0;
+    height: -webkit-calc(100% - 160px);
+    height: -moz-calc(100% - 160px);
+    height: calc(100% - 160px);
     padding: 0;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
 }
-.body-desc{
-    top: 0;
-    height: -webkit-calc(100% - 160px); 
-    height:    -moz-calc(100% - 160px); 
-    height:      calc(100% - 160px);
-    padding: 0;
-    width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+.login-form {
+    left: -webkit-calc(50% - 250px);
+    left: -moz-calc(50% - 250px);
+    left: calc(50% - 250px);
     position: relative;
-}
-.login-form{
-    left: -webkit-calc(50% - 250px); 
-    left:    -moz-calc(50% - 250px); 
-    left:      calc(50% - 250px);
-    position:relative;
-    width:500px;
-    height:250px;
+    width: 500px;
+    height: 250px;
     @include border-radius(3px);
-    
+}
+.form-control[readonly] {
+    cursor: pointer;
+}
+.progress-bar {
+    z-index: -10;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    display: block;
+    position: absolute;
+    -webkit-transition: width 225ms ease;
+    -moz-transition: width 225ms ease;
+    -o-transition: width 225ms ease;
+    -ms-transition: width 225ms ease;
+    transition: width 225ms ease;
+    border-right-width: 1px;
+    border-right-style: solid;
+    opacity: 0.08;
+    float: left;
+    @include border-radius(3px);
+    background: #EFF3EF;
 }
