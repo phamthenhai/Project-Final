@@ -191,9 +191,10 @@ notesApp.controller('notes', ['$scope', 'myService', '$rootScope', function ($sc
     $scope.convertDate = function (d) {
         var datet = new Date(d);
         if (datet === " " || datet === 'Invalid Date' || datet === ''){
-            return datet.getDate() + "." + (datet.getMonth() + 1) + "." + (1900 + datet.getYear());
+            return " ";
         }
-        return " ";
+        
+        return datet.getDate() + "." + (datet.getMonth() + 1) + "." + (1900 + datet.getYear());
     }
     $scope.ABC = function () {
             $('.datepicker').pickadate();
