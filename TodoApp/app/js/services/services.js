@@ -1,7 +1,89 @@
+notesApp.factory('itemService', ['$firebaseArray', function ($firebaseArray) {
+    var ref = new Firebase("https://intense-torch-7697.firebaseio.com/complete/");
+    var users = $firebaseArray(ref);
+    var arrAll = [];
+    users.$loaded()
+        .then(function () {
+            angular.forEach(users, function (user) {
+                arrAll.push(user);
+            })
+        });
+    return {
+        setListToScope: function () {
+            return arrAll;
+        }
+    }
+
+}]);
 notesApp.service('myService', ['$interval', function ($interval) {
     var self = this;
     var myDataRef = new Firebase('https://intense-torch-7697.firebaseio.com/complete/');
-    self.doSomething = function (item, arr, arrstarter) {
+    self.doSomething = function (inputnote, starter, startdate, datet1, datet2, repeatt, arr, arrstarter, username) {
+        var date = new Date();
+        var datet = " ";
+        var str = datet2;
+
+        if (datet1 === " " && datet2 !== " ") {
+            datet = new Date();
+            var h = (datet2.slice(0, datet2.lastIndexOf(":")));
+            var m = (datet2.slice(datet2.lastIndexOf(":") + 1, datet2.lastIndexOf(":") + 3));
+            if (datet2.lastIndexOf("PM") !== -1) {
+                datet.setHours(parseInt(h) + 12);
+                datet.setMinutes(m);
+            } else {
+                datet.setHours(h);
+                datet.setMinutes(m);
+            }
+
+        } else if (datet1 !== " " && datet2 === " ") {
+            datet = new Date(datet1);
+            //datet.setH
+        } else if (datet1 === " " && datet2 === " ") {
+            //datet.setH
+        } else {
+            datet = new Date(datet1);
+            var h = (datet2.slice(0, datet2.lastIndexOf(":")));
+            var m = (datet2.slice(datet2.lastIndexOf(":") + 1, datet2.lastIndexOf(":") + 3));
+            if (datet2.lastIndexOf("PM") !== -1) {
+                datet.setHours(parseInt(h) + 12);
+                datet.setMinutes(m);
+            } else {
+                datet.setHours(h);
+                datet.setMinutes(m);
+            }
+            //$scope.datet7 = datet.toDateString();
+        }
+        var strdate = new Date(startdate);
+        var str = " ";
+        if (strdate == 'Invalid Date' || strdate === ' ' || strdate === '') {
+            strdate = " ";
+            if (parseInt(repeatt) > 0) {
+                strdate = new Date();
+                str = strdate.toDateString();
+            } else {
+                str = " ";
+            }
+        } else {
+            str = strdate.toDateString();
+        }
+
+
+        var item = {
+            id: '',
+            nname: inputnote,
+            ndatestart: str,
+            ndateremind: datet.toString(),
+            nstart: starter,
+            repeat: repeatt,
+            complete: false,
+            completedate: " ",
+            namecomplete: " ",
+            createdate: date.toDateString(),
+            listitem: [],
+            listuser: [username],
+            comment: []
+        };
+
         var newPostRef = myDataRef.push();
         newPostRef.set(item);
         var hopperRef = myDataRef.child(newPostRef.key());
@@ -53,7 +135,7 @@ notesApp.service('myService', ['$interval', function ($interval) {
             });
             if (note.comment == undefined) {
                 note.push({
-                    comment: "[{id:0, commentname:$scope.inputcomment, commentdate:date1.toString(),username:usernamet}]"
+                    comment: "[{id:0, commentname:inputcomment, commentdate:date1.toString(),username:usernamet}]"
                 });
             } else {
                 note.comment.push({
@@ -180,6 +262,12 @@ notesApp.service('myService', ['$interval', function ($interval) {
         var hopperRef = myDataRef.child(notet.id + "/ndateremind");
         notet.ndateremind = d;
         hopperRef.set(d);
+
+    }
+    self.changerepeatService = function (notet, repeat) {
+        var hopperRef = myDataRef.child(notet.id + "/repeat");
+        notet.repeat = repeat;
+        hopperRef.set(repeat);
 
     }
     self.completeService = function (note, arrcomplete, arr, arrstarter, arrtoday, username) {
@@ -403,7 +491,7 @@ notesApp.service('myService', ['$interval', function ($interval) {
         });
         if (note.listitem == undefined) {
             note.push({
-                listitem: "[{id:idt, itemname:$scope.inputnotelist, complete:false}]"
+                listitem: "[{id:idt, itemname:inputnotelist, complete:false}]"
             });
         } else {
             note.listitem.push({
@@ -442,6 +530,53 @@ notesApp.service('myService', ['$interval', function ($interval) {
             }
 
         }, 1000);
+    }
+    self.loaddescService = function (notet, date1, date7, time1) {
+        var nds = new Date(notet.ndatestart);
+        var ndr = new Date(notet.ndateremind);
+        date1 = nds.toDateString();
+        if (nds == " " || nds == 'Invalid Date') {
+            date1 = "";
+        } else {
+            date1 = nds.toDateString();
+        }
+        if (ndr == 'Invalid Date') {
+            date7 = "";
+            time1 = "";
+        } else {
+
+            var strtime = " ";
+            if ((ndr.getHours() - 12) > 9 || (ndr.getHours()) > 9) {
+                if ((ndr.getHours() - 12) >= 0) {
+                    if (ndr.getMinutes() > 9) {
+                        strtime = ndr.getHours() - 12 + ":" + ndr.getMinutes() + " PM";
+                    } else {
+                        strtime = ndr.getHours() - 12 + ":" + "0" + ndr.getMinutes() + " PM";
+                    }
+                } else {
+                    if (ndr.getMinutes() > 9) {
+                        strtime = ndr.getHours() + ":" + ndr.getMinutes() + " PM";
+                    } else {
+                        strtime = ndr.getHours() + ":" + "0" + ndr.getMinutes() + " PM";
+                    }
+                }
+                if (ndr.getHours() - 12 === 0) {
+                    strtime = ndr.getHours() + ":" + "0" + ndr.getMinutes() + " AM";
+                }
+
+            } else {
+                if (ndr.getMinutes() > 9) {
+                    strtime = "0" + ndr.getHours() + ":" + ndr.getMinutes() + " AM";
+                } else {
+                    strtime = "0" + ndr.getHours() + ":" + "0" + ndr.getMinutes() + " AM";
+                }
+                if (ndr.getHours() === 0) {
+                    strtime = "12:" + "0" + ndr.getMinutes() + " AM";
+                }
+            }
+            date7 = ndr.toDateString();
+            time1 = strtime;
+        }
     }
     self.loadbyName = function (arrAll, username, arrtoday, arrstarter, arr, arrcomplete) {
         for (var i = 0; i < arrAll.length; i++) {
@@ -502,3 +637,364 @@ notesApp.service('myService', ['$interval', function ($interval) {
         }
     }
 }]);
+notesApp
+    .factory('UserService', UserService);
+
+UserService.$inject = ['$http'];
+
+function UserService($http) {
+    var service = {};
+
+    service.GetAll = GetAll;
+    service.GetById = GetById;
+    service.GetByUsername = GetByUsername;
+    service.Create = Create;
+    service.Update = Update;
+    service.Delete = Delete;
+
+    return service;
+
+    function GetByUsername(username) {
+        return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+    }
+
+    function Create(user) {
+        return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
+    }
+
+    function Update(user) {
+        return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
+    }
+
+    function Delete(id) {
+        return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
+    }
+    // private functions
+
+    function handleSuccess(res) {
+        return res.data;
+    }
+
+    function handleError(error) {
+        return function () {
+            return {
+                success: false,
+                message: error
+            };
+        };
+    }
+}
+notesApp
+    .factory('UserService', UserService);
+
+UserService.$inject = ['$timeout', '$filter', '$q'];
+
+function UserService($timeout, $filter, $q) {
+
+    var service = {};
+    service.GetById = GetById;
+    service.GetByUsername = GetByUsername;
+    service.Create = Create;
+    service.Update = Update;
+    service.Delete = Delete;
+
+    return service;
+
+    function GetById(id) {
+        var deferred = $q.defer();
+        var filtered = $filter('filter')(getUsers(), {
+            id: id
+        });
+        var user = filtered.length ? filtered[0] : null;
+        deferred.resolve(user);
+        return deferred.promise;
+    }
+
+    function GetByUsername(username) {
+        var deferred = $q.defer();
+        var filtered = $filter('filter')(getUsers(), {
+            username: username
+        });
+        var user = filtered.length ? filtered[0] : null;
+        deferred.resolve(user);
+        return deferred.promise;
+    }
+
+    function Create(user) {
+        var deferred = $q.defer();
+
+        // simulate api call with $timeout
+        $timeout(function () {
+            GetByUsername(user.username)
+                .then(function (duplicateUser) {
+                    if (duplicateUser !== null) {
+                        deferred.resolve({
+                            success: false,
+                            message: 'Username "' + user.username + '" is already taken'
+                        });
+                    } else {
+                        var users = getUsers();
+
+                        // assign id
+                        var lastUser = users[users.length - 1] || {
+                            id: 0
+                        };
+                        user.id = lastUser.id + 1;
+
+                        // save to local storage
+                        users.push(user);
+                        setUsers(users);
+
+                        deferred.resolve({
+                            success: true
+                        });
+                    }
+                });
+        }, 1000);
+
+        return deferred.promise;
+    }
+
+    function Update(user) {
+        var deferred = $q.defer();
+
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === user.id) {
+                users[i] = user;
+                break;
+            }
+        }
+        setUsers(users);
+        deferred.resolve();
+
+        return deferred.promise;
+    }
+
+
+    function Delete(id) {
+        var deferred = $q.defer();
+
+        var users = getUsers();
+        for (var i = 0; i < users.length; i++) {
+            var user = users[i];
+            if (user.id === id) {
+                users.splice(i, 1);
+                break;
+            }
+        }
+        setUsers(users);
+        deferred.resolve();
+
+        return deferred.promise;
+    }
+    // private functions
+
+    function getUsers() {
+        if (!localStorage.users) {
+            localStorage.users = JSON.stringify([]);
+        }
+
+        return JSON.parse(localStorage.users);
+    }
+
+    function setUsers(users) {
+        localStorage.users = JSON.stringify(users);
+    }
+}
+notesApp
+    .factory('AuthenticationService', AuthenticationService);
+
+AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
+
+function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    var service = {};
+
+    service.Login = Login;
+    service.SetCredentials = SetCredentials;
+    service.ClearCredentials = ClearCredentials;
+
+    return service;
+
+    function Login(username, password, callback) {
+
+        /* Dummy authentication for testing, uses $timeout to simulate api call
+         ----------------------------------------------*/
+        $timeout(function () {
+            var response;
+            UserService.GetByUsername(username)
+                .then(function (user) {
+                    if (user !== null && user.password === password) {
+                        response = {
+                            success: true
+                        };
+                    } else {
+                        response = {
+                            success: false,
+                            message: 'Username or password is incorrect'
+                        };
+                    }
+                    callback(response);
+                });
+        }, 1000);
+
+        /* Use this for real authentication
+         ----------------------------------------------*/
+        //$http.post('/api/authenticate', { username: username, password: password })
+        //    .success(function (response) {
+        //        callback(response);
+        //    });
+
+    }
+
+    function SetCredentials(username, password) {
+        var authdata = Base64.encode(username + ':' + password);
+
+        $rootScope.globals = {
+            currentUser: {
+                username: username,
+                authdata: authdata
+            }
+        };
+
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+        $cookieStore.put('globals', $rootScope.globals);
+    }
+
+    function ClearCredentials() {
+        $rootScope.globals = {};
+        $cookieStore.remove('globals');
+        $http.defaults.headers.common.Authorization = 'Basic';
+    }
+}
+
+// Base64 encoding service used by AuthenticationService
+var Base64 = {
+
+    keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
+
+    encode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3 = "";
+        var enc1, enc2, enc3, enc4 = "";
+        var i = 0;
+
+        do {
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+
+            output = output +
+                this.keyStr.charAt(enc1) +
+                this.keyStr.charAt(enc2) +
+                this.keyStr.charAt(enc3) +
+                this.keyStr.charAt(enc4);
+            chr1 = chr2 = chr3 = "";
+            enc1 = enc2 = enc3 = enc4 = "";
+        } while (i < input.length);
+
+        return output;
+    },
+
+    decode: function (input) {
+        var output = "";
+        var chr1, chr2, chr3 = "";
+        var enc1, enc2, enc3, enc4 = "";
+        var i = 0;
+
+        // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+        var base64test = /[^A-Za-z0-9\+\/\=]/g;
+        if (base64test.exec(input)) {
+            window.alert("There were invalid base64 characters in the input text.\n" +
+                "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
+                "Expect errors in decoding.");
+        }
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+        do {
+            enc1 = this.keyStr.indexOf(input.charAt(i++));
+            enc2 = this.keyStr.indexOf(input.charAt(i++));
+            enc3 = this.keyStr.indexOf(input.charAt(i++));
+            enc4 = this.keyStr.indexOf(input.charAt(i++));
+
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+
+            output = output + String.fromCharCode(chr1);
+
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+
+            chr1 = chr2 = chr3 = "";
+            enc1 = enc2 = enc3 = enc4 = "";
+
+        } while (i < input.length);
+
+        return output;
+    }
+};
+notesApp
+    .factory('FlashService', FlashService);
+
+FlashService.$inject = ['$rootScope'];
+
+function FlashService($rootScope) {
+    var service = {};
+
+    service.Success = Success;
+    service.Error = Error;
+
+    initService();
+
+    return service;
+
+    function initService() {
+        $rootScope.$on('$locationChangeStart', function () {
+            clearFlashMessage();
+        });
+
+        function clearFlashMessage() {
+            var flash = $rootScope.flash;
+            if (flash) {
+                if (!flash.keepAfterLocationChange) {
+                    delete $rootScope.flash;
+                } else {
+                    // only keep for a single location change
+                    flash.keepAfterLocationChange = false;
+                }
+            }
+        }
+    }
+
+    function Success(message, keepAfterLocationChange) {
+        $rootScope.flash = {
+            message: message,
+            type: 'success',
+            keepAfterLocationChange: keepAfterLocationChange
+        };
+    }
+
+    function Error(message, keepAfterLocationChange) {
+        $rootScope.flash = {
+            message: message,
+            type: 'error',
+            keepAfterLocationChange: keepAfterLocationChange
+        };
+    }
+}

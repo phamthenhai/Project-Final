@@ -143,7 +143,7 @@
                 <input ng-model="inputnote" my-enter="doSomething(inputnote, starter,date5, date6, time3, repeat)" id="input-note" type="text" maxlength="255" placeholder="Add a to do...">
                 <div class="show ">
 
-                    <span id="calen" class="fa fa-calendar-o icon" data-toggle="modal" data-target="#myModal"><span class="label-icon">{{todayStr}}</span></span>
+                    <span id="calen" class="fa fa-calendar-o icon" data-toggle="modal" data-target="#myModal"><span class="label-icon">{{todayStr}}</span></span><span class="label-icon-clear" ng-show="showclear" ng-click="cleardate()">x</span>
                     <i ng-click="changeStarter();" ng-class="starter === true ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc'" ng-model="starter" id="starter"></i>
                 </div>
             </div>
@@ -166,7 +166,7 @@
         <div class="body-desc">
             <div class="h45">
                 <span><i class="fa fa-calendar-check-o icon-black"></i></span>
-                <div class="title-menu-desc1">
+                <div class="title-menu-desc">
                     <input ng-change="changedate(note,date1)" class="datenote" id="api_buttonstartdate1_open" placeholder="Set due date" type="text" ng-model="date1" readonly> <i class="fa fa-history icon-black" id="repeat"></i>
                 </div>
             </div>
@@ -186,13 +186,13 @@
                     <input class="dateremind" id="api_button_open" type="text" placeholder="Date remind" ng-model="date7">
                     <i class="material-icons icon-black iconsize24">alarm</i>
                     <input class="dateremind" style="width:28%" id="api_buttontime_open1" type="text" placeholder="Time Remind" ng-model="time1">
-                    <i class="fa fa-times icon-black show-item" ng-click="changedate2(note, ' ', ' ')"></i>
+                    <i class="fa fa-times icon-black show-item" ng-click="changedate2(note, '','')"></i>
                 </div>
             </div>
 
             <div class="ab">
                 <ol class="list-task">
-                    <li draggable="true" ng-repeat="itemlist in note.listitem">
+                    <li ng-repeat="itemlist in note.listitem">
                         <i ng-class="itemlist.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="checkComplete(note, itemlist)"></i>
                         <span class="note-name">{{itemlist.itemname}}</span>
                         <i class="fa fa-times icon-black show-item" style="float:right; " ng-click="removeItem(note, itemlist)"></i>
@@ -219,20 +219,12 @@
                     <span class="shareuser">Share user</span>
                 </div>
             </div>
-            <div class="ab">
-                <ol class="list-task" ng-repeat=" user in shareuserlist" id="sharenotelist">
+            <div class="ab"  id="sharenotelist">
+                <ol class="list-task" ng-repeat=" user in shareuserlist">
                     <li>
                         <i ng-class="loadchecksharenote(note, user) ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,user)"></i>
                         <span class="note-name">{{user}}</span>
                     </li>
-                    <!--<li>
-                        <i ng-class="loadchecksharenote(note, 'user') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'user')"></i>
-                        <span class="note-name">3</span>
-                    </li>
-                    <li>
-                        <i ng-class="loadchecksharenote(note, 'guest') ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="sharenote(note,'guest')"></i>
-                        <span class="note-name">3</span>
-                    </li>-->
                 </ol>
             </div>
             <div class="h45">
