@@ -300,7 +300,8 @@ body, #all, html {
 
 .h45 {
   height: 45px;
-  width: 100%; }
+  width: 100%;
+  display: block; }
 
 .ab {
   width: 100%; }
