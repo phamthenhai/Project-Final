@@ -159,7 +159,7 @@
         <div class="menu-desc-label">
             <i ng-class="note.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="complete(note, $index)"></i>
             <!--<span hidden class="note-name">{{note.nname}}</span>-->
-            <textarea id="ip" onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:2000}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
+            <textarea id="ip" onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur'}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
             <span class="description-note">
                     <i  ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc' " ></i> 
                 </span></div>
@@ -170,7 +170,7 @@
                     <input ng-change="changedate(note,date1)" class="datenote" id="api_buttonstartdate1_open" placeholder="Set due date" type="text" ng-model="date1" readonly> <i class="fa fa-history icon-black" id="repeat"></i>
                 </div>
             </div>
-            <div id="repeatp">
+            <span id="repeatp">
                 <h6>
                                 <input type="radio" name="optradio"  ng-click="checkrepeat2()" ng-model="repeat2" value="0"> No repeat</h6>
                 <h6>
@@ -179,7 +179,7 @@
                                 <input type="radio" name="optradio" ng-click="checkrepeat2()" ng-model="repeat2" value="2"> Repeat every week</h6>
                 <h6>
                                 <input type="radio" name="optradio" ng-click="checkrepeat2()" ng-model="repeat2" value="3"> Repeat every month</h6>
-            </div>
+            </span>
             <div class="h45">
                 <span><i class="fa fa-calendar-check-o icon-black"></i></span>
                 <div class="title-menu-desc2">
@@ -215,9 +215,9 @@
             </div>
             <div class="h45" id="sharenote">
                 <i class="fa fa-share-alt icon-black"></i>
-                <div class="title-menu-desc">
-                    <span class="shareuser">Share user</span>
-                </div>
+                
+                    <span class="share">Share user</span>
+                
             </div>
             <div class="ab"  id="sharenotelist">
                 <ol class="list-task" ng-repeat=" user in shareuserlist">
@@ -230,9 +230,9 @@
             <div class="h45">
                 <span><i class="fa fa-paperclip icon-black"></i></span>
                 <div class="title-menu-desc">
-                    <span>
+                    <div>
                             <input class="input-file" type="text" placeholder="Add a file">
-                        </span>
+                        </div>
                     <i class="fa fa-microphone icon-black "></i>
                     <i class="fa fa-dropbox icon-black "></i>
                 </div>

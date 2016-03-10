@@ -1,7 +1,7 @@
 <li  class="note-item" ng-repeat="notet in notes " ng-bind-html-unsafe="note" ng-click="loaddesc(notet);"  ng-dblclick="toggledbldisplay(); loaddesc(notet);">
     <xng-watcher note-item="notet.listitem"></xng-watcher>
     <a href="javascript:void(0)"><div class="note-item-list" style="z-index:999; opacity:1;">
-        <i style="z-index:2;" ng-click="complete(notet, $index);  " class="fa fa-square-o icon-black index"></i>
+        <i style="z-index:2;" ng-click="complete(notet, $index); " class="fa fa-square-o icon-black index"></i>
         <span class="note-name">{{notet.nname}}</span>
         <span style="z-index:2;" class="description-note">
            

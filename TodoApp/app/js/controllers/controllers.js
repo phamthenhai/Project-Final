@@ -129,7 +129,7 @@ notesApp.controller('notes', ['$scope', 'itemService', 'myService', '$rootScope'
 
     $scope.doSomething = function (inputnote, starter, startdate, datet1, datet2, repeatt) {
             myService.doSomething(inputnote, starter, startdate, datet1, datet2, repeatt, arr, arrstarter, $rootScope.username);
-            $scope.inputnote1 = '';
+            $scope.inputnote = '';
             if ($scope.showtoday === true) {
 
             } else {

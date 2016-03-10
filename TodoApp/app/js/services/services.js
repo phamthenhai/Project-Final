@@ -1,11 +1,11 @@
 notesApp.factory('itemService', ['$firebaseArray', function ($firebaseArray) {
     var ref = new Firebase("https://intense-torch-7697.firebaseio.com/complete/");
-    var users = $firebaseArray(ref);
+    var notes = $firebaseArray(ref);
     var arrAll = [];
-    users.$loaded()
+    notes.$loaded()
         .then(function () {
-            angular.forEach(users, function (user) {
-                arrAll.push(user);
+            angular.forEach(notes, function (note) {
+                arrAll.push(note);
             })
         });
     return {
