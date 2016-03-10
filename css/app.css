@@ -383,7 +383,9 @@ li .show-item {
   width: -webkit-calc(100% - 70px);
   width: -moz-calc(100% - 70px);
   width: -ms-calc(100% - 70px);
-  width: calc(100% - 70px); }
+  width: calc(100% - 70px);
+  line-height: 20px;
+  height: 40px; }
 
 .input-file:hover, .input-note:hover, #api_buttonstartdate1_open:hover {
   outline: none; }
@@ -548,7 +550,9 @@ li .show-item {
   border: 0;
   padding-left: 5px;
   background: transparent;
-  float: left; }
+  float: left;
+  line-height: 20px;
+  height: 40px; }
 
 .datenote:focus, .dateremind:focus {
   outline: none; }
@@ -561,6 +565,8 @@ ul.datetime-picker-dropdown {
 
 .dateremind {
   width: 40%;
+  line-height: 20px;
+  height: 40px;
   float: left; }
 
 .iconsize24 {
@@ -721,7 +727,8 @@ ul.datetime-picker-dropdown {
   border: 0;
   background: #668964;
   color: #FFF;
-  line-height: 35px;
+  height: 40px;
+  line-height: 20px !important;
   float: left;
   outline: none;
   margin-top: 3px;
@@ -795,10 +802,10 @@ ul.datetime-picker-dropdown {
   background: transparent;
   border: 0;
   height: 40px;
-  width: -webkit-calc(100% - 170px);
-  width: -moz-calc(100% - 170px);
-  width: -ms-calc(100% - 170px);
-  width: calc(100% - 170px);
+  width: -webkit-calc(99% - 170px);
+  width: -moz-calc(99% - 170px);
+  width: -ms-calc(99% - 170px);
+  width: calc(99% - 170px);
   display: inline-block;
   overflow: hidden !important;
   text-overflow: ellipsis; }
@@ -850,7 +857,7 @@ a {
 
 .scroll-note {
   top: 0;
-  height: 120vh;
+  height: 90vh;
   height: -webkit-calc(100vh - 40px);
   height: -moz-calc(100vh - 40px);
   height: -ms-calc(100vh - 40px);
