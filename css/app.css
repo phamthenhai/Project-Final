@@ -372,9 +372,9 @@ li .show-item {
   display: inline-block; }
 
 .input-note, #api_buttonstartdate1_open {
-  width: -webkit-calc(100% - 80px);
-  width: -moz-calc(100% - 80px);
-  width: calc(100% - 80px); }
+  width: -webkit-calc(100% - 90px);
+  width: -moz-calc(100% - 90px);
+  width: calc(100% - 90px); }
 
 .input-file:hover, .input-note:hover, #api_buttonstartdate1_open:hover {
   outline: none; }
