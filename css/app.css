@@ -531,9 +531,10 @@ li .show-item {
   line-height: 20px; }
 
 .datenote, .dateremind {
-  width: -webkit-calc(100% - 60px);
-  width: -moz-calc(100% - 60px);
-  width: calc(100% - 60px);
+  width: -webkit-calc(100% - 80px);
+  width: -moz-calc(100% - 80px);
+  width: -ms-calc(100% - 80px);
+  width: calc(100% - 80px);
   border: 0;
   padding-left: 5px;
   background: transparent;
