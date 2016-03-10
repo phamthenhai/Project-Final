@@ -133,7 +133,8 @@ body, #all, html {
 
 #repeatp {
   display: block;
-  margin-left: 40px; }
+  margin-left: 40px;
+  position: relative; }
 
 #search-input {
   line-height: 20px;
