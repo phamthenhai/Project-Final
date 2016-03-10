@@ -299,7 +299,8 @@ body, #all, html {
   line-height: 40px; }
 
 .h45 {
-  height: 45px; }
+  height: 45px;
+  position: absolute; }
 
 .h30 {
   height: 30px;
