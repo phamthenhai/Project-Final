@@ -311,9 +311,6 @@ body, #all, html {
   border-bottom: 1px solid #EBEBEB;
   border-top: 1px solid #EBEBEB; }
 
-.ab {
-  display: inline-block; }
-
 .ab li:hover .show-item,
 .h45:hover .show-item,
 li:hover .show-item {
