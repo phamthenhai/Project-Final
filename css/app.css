@@ -312,7 +312,7 @@ body, #all, html {
   border-top: 1px solid #EBEBEB; }
 
 .ab {
-  width: 100%; }
+  display: inline-block; }
 
 .ab li:hover .show-item,
 .h45:hover .show-item,
@@ -894,4 +894,4 @@ a {
   color: white; }
 
 #myModal1 {
-  z-index: 99999; }
+  z-index: 9999999; }
