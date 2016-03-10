@@ -488,7 +488,8 @@ li .show-item {
 
 #repeatp h6 {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  display: block; }
 
 .reminder-head, .comment {
   height: 65px;
