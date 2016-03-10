@@ -138,7 +138,6 @@ body, #all, html {
 #repeatp {
   display: block;
   margin-left: 40px;
-  height: 120px;
   position: relative; }
 
 #search-input {
@@ -851,9 +850,9 @@ a {
 .scroll-note {
   top: 0;
   height: 100vh;
-  height: -webkit-calc(100vh - 40px);
+  height: -webkit-calc(100vh);
   height: -moz-calc(100vh - 40px);
-  height: -ms-calc(100vh);
+  height: -ms-calc(100vh - 40px);
   height: calc(100vh - 40px);
   padding: 0;
   width: 100%;
