@@ -126,6 +126,9 @@ body, #all, html {
 /*.sidebar-nav li a{
     margin-left: 6px;
 }*/
+.share {
+  line-height: 30px; }
+
 .sidebar-nav li {
   line-height: 40px;
   padding-left: 0px;
@@ -135,6 +138,7 @@ body, #all, html {
 #repeatp {
   display: block;
   margin-left: 40px;
+  height: 120px;
   position: relative; }
 
 #search-input {
@@ -846,7 +850,7 @@ a {
 
 .scroll-note {
   top: 0;
-  height: 90vh;
+  height: 80vh;
   height: -webkit-calc(100vh - 40px);
   height: -moz-calc(100vh - 40px);
   height: -ms-calc(100vh - 40px);
