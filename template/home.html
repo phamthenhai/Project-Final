@@ -159,7 +159,7 @@
         <div class="menu-desc-label">
             <i ng-class="note.complete ? 'fa fa-check-square-o icon-black': 'fa fa-square-o icon-black'" ng-click="complete(note, $index)"></i>
             <!--<span hidden class="note-name">{{note.nname}}</span>-->
-            <textarea id="ip" onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur', debounce:2000}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
+            <textarea id="ip" onkeypress="auto_height(this)" maxlength="210" ng-model-options="{updateOn:'blur'}" ng-change="updatenname(note)" class="edit-form" ng-model="editnote"></textarea>
             <span class="description-note">
                     <i  ng-click="checkstart(note)" ng-class="note.nstart ? 'fa fa-star icon-desc' : 'fa fa-star-o icon-desc' " ></i> 
                 </span></div>

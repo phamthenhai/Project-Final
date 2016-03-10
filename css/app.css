@@ -117,6 +117,7 @@ body, #all, html {
   width: 250px;
   height: -webkit-calc(100% - 110px);
   height: -moz-calc(100% - 110px);
+  height: -ms-calc(100% - 110px);
   height: calc(100% - 110px);
   overflow-y: auto;
   overflow-x: hidden;
@@ -345,6 +346,7 @@ li .show-item {
   line-height: 40px;
   width: -webkit-calc(100% - 40px);
   width: -moz-calc(100% - 40px);
+  width: -ms-calc(100% - 40px);
   width: calc(100% - 0px);
   border-bottom: 1px solid #EBEBEB;
   margin-left: 40px;
@@ -365,6 +367,7 @@ li .show-item {
   float: left;
   width: -webkit-calc(100% - 120px);
   width: -moz-calc(100% - 120px);
+  width: -ms-calc(100% - 120px);
   width: calc(100% - 120px);
   background: transparent;
   padding-left: 5px; }
@@ -409,6 +412,7 @@ li .show-item {
 .date-task {
   width: -webkit-calc(100% - 80px);
   width: -moz-calc(100% - 80px);
+  width: -ms-calc(100% - 80px);
   width: calc(100% - 80px);
   align-items: center;
   text-align: center;
@@ -443,6 +447,7 @@ li .show-item {
   top: 25px;
   left: -webkit-calc(50% - 150px);
   left: -moz-calc(50% - 150px);
+  left: -ms-calc(50% - 150px);
   left: calc(50% - 150px);
   width: 300px;
   height: 50px;
@@ -506,6 +511,7 @@ li .show-item {
   margin: 0;
   height: -webkit-calc(100% - 350px);
   height: -moz-calc(100% - 350px);
+  height: -ms-calc(100% - 350px);
   height: calc(100% - 350px);
   position: relative; }
 
@@ -629,6 +635,7 @@ ul.datetime-picker-dropdown {
     float: left;
     width: -webkit-calc(100% - 40px);
     width: -moz-calc(100% - 40px);
+    width: -ms-calc(100% - 40px);
     width: calc(100% - 40px);
     overflow: hidden; } }
 
@@ -642,6 +649,7 @@ ul.datetime-picker-dropdown {
     margin-left: 250px;
     width: -webkit-calc(100% - 250px);
     width: -moz-calc(100% - 250px);
+    width: -ms-calc(100% - 250px);
     width: calc(100% - 250px);
     float: left;
     overflow: visible; } }
@@ -709,17 +717,17 @@ ul.datetime-picker-dropdown {
 #input-note {
   border: 0;
   background: #668964;
-  margin-top: 6px;
   color: #FFF;
-  line-height: 30px;
+  line-height: 40px;
   float: left;
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 0px;
   text-overflow: ellipsis;
   padding-right: 0px;
   width: -webkit-calc(100% - 150px);
   width: -moz-calc(100% - 150px);
+  width: -ms-calc(100% - 150px);
   width: calc(100% - 150px); }
 
 .icon-new-note {
@@ -733,12 +741,11 @@ ul.datetime-picker-dropdown {
 
 .btn-search {
   margin: 5px;
-  height: 40px;
-  width: 40px;
   background: #668964;
   color: #FFF;
   opacity: 0.7;
   border: 0;
+  line-height: 35px;
   float: left; }
 
 .show {
@@ -780,12 +787,13 @@ ul.datetime-picker-dropdown {
   color: #000;
   line-height: 40px;
   height: 40px;
-  font-size: 16px;
+  font-size: 15px;
   background: transparent;
   border: 0;
   height: 40px;
   width: -webkit-calc(100% - 170px);
   width: -moz-calc(100% - 170px);
+  width: -ms-calc(100% - 170px);
   width: calc(100% - 170px);
   display: inline-block;
   overflow: hidden !important;
@@ -839,10 +847,10 @@ a {
 .scroll-note {
   top: 0;
   height: 90vh;
-  height: -webkit-calc(100vh - 35px);
-  height: -moz-calc(100vh - 35px);
-  height: -ms-calc(100vh - 35px);
-  height: calc(100vh - 35px);
+  height: -webkit-calc(100vh);
+  height: -moz-calc(100vh);
+  height: -ms-calc(100vh);
+  height: calc(100vh);
   padding: 0;
   width: 100%;
   overflow-y: auto;
@@ -853,6 +861,7 @@ a {
   top: 0;
   height: -webkit-calc(100% - 160px);
   height: -moz-calc(100% - 160px);
+  height: -ms-calc(100% - 160px);
   height: calc(100% - 160px);
   padding: 0;
   width: 100%;
