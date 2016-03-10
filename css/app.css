@@ -850,10 +850,11 @@ a {
 .scroll-note {
   top: 0;
   height: 100vh;
-  height: -webkit-calc(100vh);
+  height: -webkit-calc(100vh - 40px);
   height: -moz-calc(100vh - 40px);
   height: -ms-calc(100vh - 40px);
   height: calc(100vh - 40px);
+  height: 100vh;
   padding: 0;
   width: 100%;
   overflow-y: auto;
