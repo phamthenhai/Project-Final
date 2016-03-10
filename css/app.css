@@ -127,7 +127,9 @@ body, #all, html {
     margin-left: 6px;
 }*/
 .share {
-  line-height: 30px; }
+  line-height: 40px;
+  height: 40px;
+  display: inline-block; }
 
 .sidebar-nav li {
   line-height: 40px;
@@ -373,7 +375,9 @@ li .show-item {
   width: -ms-calc(100% - 120px);
   width: calc(100% - 120px);
   background: transparent;
-  padding-left: 5px; }
+  padding-left: 5px;
+  height: 40px;
+  line-height: 20px; }
 
 .icon-right {
   float: right;
