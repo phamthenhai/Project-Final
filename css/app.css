@@ -300,7 +300,10 @@ body, #all, html {
 
 .h45 {
   height: 45px;
-  position: absolute; }
+  width: 100%; }
+
+.ab {
+  width: 100%; }
 
 .h30 {
   height: 30px;
